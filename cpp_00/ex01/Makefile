@@ -1,8 +1,8 @@
 NAME := PhoneDirectory
-SRC_FILES := Contact.cpp PhoneBook.cpp
+SRC_FILES := Contact.cpp PhoneBook.cpp Main.cpp
 OBJ_FILES := $(patsubst %.cpp, obj/%.o, $(SRC_FILES))
 CXX := c++
-CXXFLAGS := -std=c++98 -Wall -Werror -Wextra
+CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -g3
 
 all: $(NAME)
 
