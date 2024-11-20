@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:21:31 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/19 17:28:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/20 14:26:48 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@
 # define LYELLOW 	"\033[0;33m"
 # define LRED 		"\033[0;31m"
 # define GREY 		"\033[1;37m"
+# define MAGENTA	"\033[1;35m"
 
 #endif /* MAIN_H */

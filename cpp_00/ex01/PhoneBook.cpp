@@ -6,150 +6,153 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:52:38 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/19 18:54:53 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:22:18 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <sstream>
-#include <string>
 
 PhoneBook::PhoneBook(void)
 {
 	this->_DirectoryIterator = 0;
+	this->_NumContacts = 0;
 	return ;
 }
 
 PhoneBook::~PhoneBook(void) {}
 
-void		PrintOneInfo(std::string Info)
+void	PrintOneInfo(std::string Info, int size)
 {
-	for (__int8_t i = 0; i < 10 && i < (__int8_t) Info.size(); i++)
-		std::cout << GREY << Info[i] << NEUTRAL;
-	if (Info.size() > 10)
+	std::cout << std::setw(10) << std::right << Info;
+	if (size > 10)
+	{
 		std::cout << ".";
-	PRINT_YELLOW_PIPE;
+		std::cout << YELLOW << "|" << NEUTRAL;
+		return ;
+	}
+	std::cout << YELLOW << " |" << NEUTRAL;
 	return ;
 }
 
-void	PrintContactSummary(Contact Contact, int Index)
+
+void PrintContactSummary(Contact Contact, int Index)
 {
-	std::cout << GREY << Index << NEUTRAL;
-	PRINT_YELLOW_PIPE;
-	PrintOneInfo(Contact.GetFirstName());
-	PrintOneInfo(Contact.GetLastName());
-	PrintOneInfo(Contact.GetPhoneNumber());
-	std::cout << "\n";
-	return ;
+    std::string tmp;
+
+    std::cout << GREY << std::setw(5) << Index << NEUTRAL;
+	std::cout << YELLOW << " |" << NEUTRAL;
+
+    tmp = Contact.GetFirstName();
+    PrintOneInfo(tmp.substr(0, 9), tmp.size());
+
+    tmp = Contact.GetLastName();
+    PrintOneInfo(tmp.substr(0, 9), tmp.size());
+
+    tmp = Contact.GetPhoneNumber();
+    PrintOneInfo(tmp.substr(0, 9), tmp.size());
+
+    std::cout << std::endl;
 }
 
 void	PrintOneContact(Contact Contact)
 {
-	std::cout << GREY << "First Name : " << NEUTRAL ;
+	std::cout << GREY << "First Name : " << NEUTRAL;
 	std::cout << Contact.GetFirstName() << "\n";
-
-	std::cout << GREY << "Last Name : " << NEUTRAL ;
+	std::cout << GREY << "Last Name : " << NEUTRAL;
 	std::cout << Contact.GetLastName() << "\n";
-
-	std::cout << GREY << "Nickname : " << NEUTRAL ;
+	std::cout << GREY << "Nickname : " << NEUTRAL;
 	std::cout << Contact.GetNickName() << "\n";
-
-	std::cout << GREY << "Phone Number : " << NEUTRAL ;
+	std::cout << GREY << "Phone Number : " << NEUTRAL;
 	std::cout << Contact.GetPhoneNumber() << "\n";
-
-	std::cout << GREY << "Deepest Secret : " << NEUTRAL ;
+	std::cout << GREY << "Deepest Secret : " << NEUTRAL;
 	std::cout << Contact.GetDeepestSecret() << "\n";
 	return ;
 }
 
-void	PhoneBook::ADD(void)
+void PhoneBook::AddContactHelper(WhichInfo Info, std::string Message)
 {
 	std::string	Buffer;
 
-	std::cout << "Please enter new contact's first name : ";
-	std::getline(std::cin, Buffer);
-	while(Buffer.empty())
+	std::cout << Message;
+	if (!std::getline(std::cin, Buffer))
+	{
+		std::cout << "EOF detected.\n";
+		ExitPhoneBook();
+	}
+	while (Buffer.empty())
 	{
 		std::cout << RED << "Empty input isn't accepted.\n"
 		<< "Please enter a non-empty input : " << NEUTRAL;
-		std::getline(std::cin, Buffer);
+		if (!std::getline(std::cin, Buffer))
+		{
+			std::cout << "EOF detected.\n";
+			ExitPhoneBook();
+		}
 	}
-	this->_Directory[_DirectoryIterator].SetFirstName(Buffer);
-
-	std::cout << "Please enter new contact's last name : ";
-	std::getline(std::cin, Buffer);
-	while(Buffer.empty())
-	{
-		std::cout << RED << "Empty input isn't accepted.\n"
-		<< "Please enter a non-empty input : " << NEUTRAL;
-		std::getline(std::cin, Buffer);
-	}
-	this->_Directory[_DirectoryIterator].SetLastName(Buffer);
-
-	std::cout << "Please enter new contact's nickname : ";
-	std::getline(std::cin, Buffer);
-	while(Buffer.empty())
-	{
-		std::cout << RED << "Empty input isn't accepted.\n"
-		<< "Please enter a non-empty input : " << NEUTRAL;
-		std::getline(std::cin, Buffer);
-	}
-	this->_Directory[_DirectoryIterator].SetNickName(Buffer);
-
-	std::cout << "Please enter new contact's phone number : ";
-	std::getline(std::cin, Buffer);
-	while(Buffer.empty())
-	{
-		std::cout << RED << "Empty input isn't accepted.\n"
-		<< "Please enter a non-empty input : " << NEUTRAL;
-		std::getline(std::cin, Buffer);
-	}
-	this->_Directory[_DirectoryIterator].SetPhoneNumber(Buffer);
-
-	std::cout << "Please enter new contact's deepest secret : ";
-	std::getline(std::cin, Buffer);
-	while(Buffer.empty())
-	{
-		std::cout << RED << "Empty input isn't accepted.\n"
-		<< "Please enter a non-empty input : " << NEUTRAL;
-		std::getline(std::cin, Buffer);
-	}
-	this->_Directory[_DirectoryIterator].SetDeepestSecret(Buffer);
-
-	_DirectoryIterator++;
-	_DirectoryIterator %= 8;
+	if (Info == FIRST_NAME)
+		this->_Directory[_DirectoryIterator].SetFirstName(Buffer);
+	else if (Info == LAST_NAME)
+		this->_Directory[_DirectoryIterator].SetLastName(Buffer);
+	else if (Info == NICK_NAME)
+		this->_Directory[_DirectoryIterator].SetNickName(Buffer);
+	else if (Info == PHONE_NUMBER)
+		this->_Directory[_DirectoryIterator].SetPhoneNumber(Buffer);
+	else
+		this->_Directory[_DirectoryIterator].SetDeepestSecret(Buffer);
 	return ;
 }
 
-bool PhoneBook::SEARCH() const
+void PhoneBook::AddContact(void)
 {
-	std::string	tmp;
-	int			ContactIndex;
+	AddContactHelper(FIRST_NAME, "Please enter new contact's first name : ");
+	AddContactHelper(LAST_NAME, "Please enter new contact's last name : ");
+	AddContactHelper(NICK_NAME, "Please enter new contact's nickname : ");
+	AddContactHelper(PHONE_NUMBER, "Please enter new contact's phone number : ");
+	AddContactHelper(DEEPEST_SECRET, "Please enter new contact's deepest secret : ");
+	_DirectoryIterator++;
+	_DirectoryIterator %= 8;
+	if (_NumContacts != 8)
+		_NumContacts++;
+	return ;
+}
 
-	for (__int8_t i = 0; i < this->_DirectoryIterator; i++)
+bool PhoneBook::SearchContact() const
+{
+	std::string tmp;
+	int ContactIndex;
+
+    std::cout << MAGENTA << "INDEX"
+              << std::setw(12) << std::right << "FIRSTNAME"
+              << std::setw(12) << std::right << "LASTNAME"
+              << std::setw(14) << std::right << "PHONENUMBER"
+              << NEUTRAL << std::endl;
+
+	for (__int8_t i = 0; i < this->_NumContacts; i++)
 		PrintContactSummary(this->_Directory[i], i + 1);
 	std::cout << "Please chose a contact to display : ";
-	std::getline(std::cin, tmp);
+	if (!std::getline(std::cin, tmp))
+	{
+		std::cout << "EOF detected.\n";
+		ExitPhoneBook();
+	}
 	std::istringstream(tmp) >> ContactIndex;
 	if (ContactIndex <= 0 || ContactIndex > 8)
 	{
-		std::cout << RED << "Error.\nContact's index must be between 1 and 8\n"
-		<< NEUTRAL;
+		std::cout << RED << "Error.\nContact's index must be between 1 and 8\n" << NEUTRAL;
 		return (false);
 	}
-	if (ContactIndex > this->_DirectoryIterator)
+	if (ContactIndex > this->_NumContacts)
 	{
-		std::cout << RED << "Error.\nContact's index doesn't exist\n"
-		<< NEUTRAL;
+		std::cout << RED << "Error.\nContact's index doesn't exist\n" << NEUTRAL;
 		return (false);
 	}
 	PrintOneContact(this->_Directory[ContactIndex - 1]);
 	return (true);
 }
 
-void	PhoneBook::EXIT(void) const
+void PhoneBook::ExitPhoneBook(void) const
 {
-	std::cout << RED << "Quitting program... Miss you already\n" << NEUTRAL;
+	std::cout << RED << "Quitting program... Miss you already"
+	<< NEUTRAL << std::endl;
 	exit(0);
 }

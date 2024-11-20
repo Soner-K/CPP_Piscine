@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:52:14 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/19 15:28:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:09:02 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,27 +49,27 @@ std::string Contact::GetDeepestSecret(void) const
 	return (this->_DeepestSecret);
 }
 
-void	Contact::SetFirstName(std::string FirstName)
+void	Contact::SetFirstName(std::string const &FirstName)
 {
 	this->_FirstName = FirstName;
 }
 
-void	Contact::SetLastName(std::string LastName)
+void	Contact::SetLastName(std::string const &LastName)
 {
 	this->_LastName = LastName;
 }
 
-void	Contact::SetNickName(std::string NickName)
+void	Contact::SetNickName(std::string const &NickName)
 {
 	this->_NickName = NickName;
 }
 
-void	Contact::SetPhoneNumber(std::string PhoneNumber)
+void	Contact::SetPhoneNumber(std::string const &PhoneNumber)
 {
 	this->_PhoneNumber = PhoneNumber;
 }
 
-void	Contact::SetDeepestSecret(std::string DeepestSecret)
+void	Contact::SetDeepestSecret(std::string const &DeepestSecret)
 {
 	this->_DeepestSecret = DeepestSecret;
 }

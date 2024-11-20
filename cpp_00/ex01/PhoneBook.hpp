@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:38:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/19 17:34:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:18:49 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "Main.hpp"
 #include <iostream>
 #include <stdlib.h>
+#include <iomanip>
+#include <sstream>
+#include <string>
 
 class PhoneBook
 {
@@ -25,19 +28,23 @@ public:
 				PhoneBook(void);
 				~PhoneBook(void);
 
-	void		ADD(void);
-	bool		SEARCH() const;
-	void		EXIT(void) const;
+	typedef enum {
+		FIRST_NAME,
+		LAST_NAME,
+		NICK_NAME,
+		PHONE_NUMBER,
+		DEEPEST_SECRET
+	}WhichInfo;
 
-	// void		PrintOneInfo(std::string Info) const;
-	// void		PrintContactSummary(Contact Contact, int Index) const;
-	// void		PrintOneContact(Contact Contact) const;
-
-
+	void		AddContact(void);
+	void		AddContactHelper(WhichInfo Info, std::string Message);
+	bool		SearchContact() const;
+	void		ExitPhoneBook(void) const;
 private:
 
 	Contact		_Directory[8];
 	__int8_t	_DirectoryIterator;
+	__int8_t	_NumContacts;
 };
 
 #endif /* PHONEBOOK_H */

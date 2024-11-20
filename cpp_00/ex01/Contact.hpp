@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:52:18 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/19 16:43:46 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/20 16:08:14 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ public:
 	std::string GetNickName(void) const;
 	std::string GetPhoneNumber(void) const;
 	std::string GetDeepestSecret(void) const;
-	void		SetFirstName(std::string FirstName);
-	void		SetLastName(std::string LastName);
-	void		SetNickName(std::string NickName);
-	void		SetPhoneNumber(std::string PhoneNumber);
-	void		SetDeepestSecret(std::string DeepestSecret);
+	void		SetFirstName(std::string const &FirstName);
+	void		SetLastName(std::string const &LastName);
+	void		SetNickName(std::string const &NickName);
+	void		SetPhoneNumber(std::string const &PhoneNumber);
+	void		SetDeepestSecret(std::string const &DeepestSecret);
 
 private:
 	std::string	_FirstName;
