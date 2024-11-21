@@ -6,10 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:38:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/20 16:18:49 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:51:14 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef PHONEBOOK_H
 # define PHONEBOOK_H
 
@@ -20,6 +21,9 @@
 #include <iomanip>
 #include <sstream>
 #include <string>
+
+# define FAILURE 0
+# define SUCCESS 1
 
 class PhoneBook
 {
@@ -36,8 +40,8 @@ public:
 		DEEPEST_SECRET
 	}WhichInfo;
 
-	void		AddContact(void);
-	void		AddContactHelper(WhichInfo Info, std::string Message);
+	bool		AddContact(void);
+	bool		AddContactHelper(WhichInfo Info, std::string Message);
 	bool		SearchContact() const;
 	void		ExitPhoneBook(void) const;
 private:

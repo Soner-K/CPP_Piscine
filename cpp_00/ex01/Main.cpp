@@ -6,11 +6,18 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:21:18 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/20 16:13:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:14:53 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Main.hpp"
+
+void	EofDetected(PhoneBook Book)
+{
+	std::cout << "EOF detected.\n";
+	Book.ExitPhoneBook();
+	return ;
+}
 
 int main(void)
 {
@@ -22,16 +29,26 @@ int main(void)
 		std::cout << MAGENTA << INPUT_MSG << NEUTRAL;
 		if (!std::getline(std::cin, Buf))
 		{
-			std::cout << "EOF detected.\n";
-			Book.ExitPhoneBook();
+			EofDetected(Book);
+			return (0);
 		}
 		if (Buf == "EXIT")
+		{
 			Book.ExitPhoneBook();
+			return (0);
+		}
 		else if (Buf == "SEARCH")
-			Book.SearchContact();
+		{
+			if (Book.SearchContact() == FAILURE)
+				return (EofDetected(Book), 0);
+		}
 		else if (Buf == "ADD")
-			Book.AddContact();
+		{
+			if (Book.AddContact() == FAILURE)
+				return (EofDetected(Book), 0);
+		}
 		else
 			std::cout << RED << ERR_MSG_WRONG_INPUT << NEUTRAL;
 	}
+	return (0);
 }

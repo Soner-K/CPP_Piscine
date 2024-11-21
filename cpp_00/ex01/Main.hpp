@@ -6,10 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:21:31 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/20 14:26:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:51:05 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef MAIN_H
 # define MAIN_H
 

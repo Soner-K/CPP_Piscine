@@ -6,10 +6,11 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:52:18 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/20 16:08:14 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/21 18:51:10 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
 #ifndef CONTACT_H
 # define CONTACT_H
 
