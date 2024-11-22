@@ -6,12 +6,13 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 18:50:42 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/21 21:00:50 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/22 09:42:04 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
 #include <iostream> 
+#include <ctime>
 
 # define BLUE 	 "\033[34m"
 # define NEUTRAL "\033[0m"
@@ -24,6 +25,7 @@ int	Account::_totalNbWithdrawals = 0;
 Account::Account(int initial_deposit) :
 _amount(initial_deposit)
 {
+	_displayTimestamp();
 	this->_accountIndex = _nbAccounts;
 	this->_nbDeposits = 0;
 	this->_nbWithdrawals = 0;
@@ -38,10 +40,14 @@ _amount(initial_deposit)
 
 Account::~Account(void)
 {
+	_displayTimestamp();
 	std::cout
 	<< "index:" << BLUE << this->_accountIndex << NEUTRAL
 	<< ";amount:" << BLUE << this->_amount << NEUTRAL
 	<< ";closed\n";
+	_nbAccounts--;
+	if (_nbAccounts == 0)
+		std::cout << "\n";
 	return ;
 }
 
@@ -55,6 +61,7 @@ int		Account::getNbWithdrawals(void) { return (_totalNbWithdrawals); }
 
 void 	Account::makeDeposit(int deposit)
 {
+	_displayTimestamp();
 	this->_nbDeposits++;
 	_totalAmount += deposit;
 	_totalNbDeposits++;
@@ -71,6 +78,7 @@ void 	Account::makeDeposit(int deposit)
 
 void	Account::displayAccountsInfos(void)
 {
+	_displayTimestamp();
 	std::cout
 	<< "accounts:" << BLUE << _nbAccounts << NEUTRAL
 	<< ";total:" << BLUE << _totalAmount << NEUTRAL
@@ -82,6 +90,7 @@ void	Account::displayAccountsInfos(void)
 
 bool 	Account::makeWithdrawal(int withdrawal)
 {
+	_displayTimestamp();
 	std::cout
 	<< "index:" << BLUE << this->_accountIndex << NEUTRAL
 	<< ";p_amount:" << BLUE << this->_amount << NEUTRAL;
@@ -105,6 +114,7 @@ int		Account::checkAmount(void) const { return (this->_amount); }
 
 void	Account::displayStatus(void) const
 {
+	_displayTimestamp();
 	std::cout
 	<< "index:" << BLUE << this->_accountIndex << NEUTRAL
 	<< ";amount:" << BLUE << this->_amount << NEUTRAL
@@ -112,4 +122,14 @@ void	Account::displayStatus(void) const
 	<< ";withdrawals:" << BLUE << this->_nbWithdrawals << NEUTRAL
 	<< "\n";
 	return ;
+}
+
+void	Account::_displayTimestamp(void)
+{
+    std::time_t now = std::time(NULL);
+    std::tm* local_time = std::localtime(&now);
+
+    char buffer[20];
+    std::strftime(buffer, sizeof(buffer), "%Y%m%d_%H%M%S", local_time);
+    std::cout << "[" << buffer << "] ";
 }
