@@ -5,31 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 14:49:18 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/24 15:27:51 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/11/25 13:07:16 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/11/25 14:20:02 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
-#include "Weapon.hpp"
+#include "Harl.hpp"
 
-int	main(void)
+int main(void)
 {
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
-	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(club);
-		jim.attack();
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return (0);
+	Harl	harlito;
+
+	harlito.complain("DEBUG");
+	harlito.complain("INFO");
+	harlito.complain("WARNING");
+	harlito.complain("ERROR");
+	harlito.complain("");
+	harlito.complain("OKOKO");
 }
