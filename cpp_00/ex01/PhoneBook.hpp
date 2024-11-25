@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:38:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/21 18:51:14 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:54:34 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,21 @@ public:
 				PhoneBook(void);
 				~PhoneBook(void);
 
+
+	bool		AddContact(void);
+	bool		SearchContact() const;
+	void		ExitPhoneBook(void) const;
+
+private:
+
 	typedef enum {
 		FIRST_NAME,
 		LAST_NAME,
 		NICK_NAME,
 		PHONE_NUMBER,
 		DEEPEST_SECRET
-	}WhichInfo;
-
-	bool		AddContact(void);
-	bool		AddContactHelper(WhichInfo Info, std::string Message);
-	bool		SearchContact() const;
-	void		ExitPhoneBook(void) const;
-private:
-
+	}_WhichInfo;
+	bool		AddContactHelper(_WhichInfo Info, std::string Message);
 	Contact		_Directory[8];
 	__int8_t	_DirectoryIterator;
 	__int8_t	_NumContacts;

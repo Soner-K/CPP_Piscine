@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 13:52:38 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/21 19:38:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:54:42 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	PrintOneContact(Contact Contact)
 	return ;
 }
 
-bool PhoneBook::AddContactHelper(WhichInfo Info, std::string Message)
+bool PhoneBook::AddContactHelper(_WhichInfo Info, std::string Message)
 {
 	std::string	Buffer;
 

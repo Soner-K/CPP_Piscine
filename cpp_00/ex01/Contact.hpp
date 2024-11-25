@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 12:52:18 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/21 18:51:10 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:51:51 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ public:
 				Contact(void);
 				~Contact(void);
 
-	// __int8_t	GetIndex(void) const;
 	std::string GetFirstName(void) const;
 	std::string GetLastName(void) const;
 	std::string GetNickName(void) const;
