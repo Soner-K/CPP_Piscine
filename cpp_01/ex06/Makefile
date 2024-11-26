@@ -1,4 +1,4 @@
-NAME := HarlFilter
+NAME := harlFilter
 SRC_FILES := main.cpp Harl.cpp
 OBJ_FILES := $(patsubst %.cpp, obj/%.o, $(SRC_FILES))
 CXX := c++

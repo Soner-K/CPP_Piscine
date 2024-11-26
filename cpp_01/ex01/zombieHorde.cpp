@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:13:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/22 14:10:01 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:53:05 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ Zombie* zombieHorde(int N, std::string name)
 		return (NULL);
 	}
 	while (N--)
-	{
 		zombieArray[N].setName(name);
-		zombieArray[N].announce();
-	}
 	return (zombieArray);
 }
