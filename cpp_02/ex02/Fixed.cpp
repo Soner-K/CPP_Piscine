@@ -5,18 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 16:57:35 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/29 13:06:43 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/11/28 20:57:24 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/11/29 15:16:39 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-/*Constructor*/
+/* Constructors */
 Fixed::Fixed(void) : _val(0)
 {
 	std::cout
 	<< "Default constructor called\n";
+	return ;
+}
+
+Fixed::Fixed(const int n)
+{
+	std::cout
+	<< "Int constructor called\n";
+	this->_val = n << this->_fixedDecimalBits;
+	return ;
+}
+
+Fixed::Fixed(const float f)
+{
+	std::cout
+	<< "Float constructor called\n";
+	this->_val = roundf(f *(1 << this->_fixedDecimalBits));
 	return ;
 }
 
@@ -25,7 +41,6 @@ Fixed::~Fixed(void)
 {
 	std::cout
 	<< "Destructor called\n";
-	return ;
 }
 
 /*Copy constructor*/
@@ -38,7 +53,7 @@ Fixed::Fixed(const Fixed& other)
 }
 
 /*Overload*/
-Fixed& Fixed::operator=(const Fixed& rhs)
+Fixed&	Fixed::operator=(const Fixed& rhs)
 {
 	std::cout
 	<< "Copy assignment operator called\n";
@@ -47,12 +62,34 @@ Fixed& Fixed::operator=(const Fixed& rhs)
 	return (*this);
 }
 
-/*Geter and seter*/
-int	Fixed::getRawBits(void) const
+std::ostream&	operator<<(std::ostream& o, const Fixed &rhs)
 {
-	std::cout
-	<< "getRawBits member function called\n";
+	o << rhs.toFloat();
+	return (o);
+}
+
+
+/*geter and seter*/
+int		Fixed::getRawBits(void) const
+{
 	return (this->_val);
 }
 
-void	Fixed::setRawBits(int const raw) {this->_val = raw;}
+void	Fixed::setRawBits(int const raw)
+{
+	this->_val = raw;
+	return ;
+}
+
+/*Other*/
+float	Fixed::toFloat(void)const
+{
+	float	coefficient = 1.0f / (1 << this->_fixedDecimalBits);
+	float	result	= (float) this->_val * coefficient;
+	return (result);
+}
+
+int		Fixed::toInt(void) const
+{
+	return ((int)this->_val / (1 << this->_fixedDecimalBits));
+}

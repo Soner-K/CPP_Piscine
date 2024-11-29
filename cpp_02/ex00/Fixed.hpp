@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:58:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/28 19:05:45 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:16:46 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ public:
 	void				setRawBits(int const raw); //private?
 
 private:
-	int					_rawBits;
-	static const int	_fixedDecimalBits;
+	int					_val;
+	static const int	_fixedDecimalBits = 8;
 };
 
 #endif /* FIXED_H */
