@@ -1,6 +1,8 @@
 NAME := ex00
 SRC_FILES := Fixed.cpp main.cpp
-OBJ_FILES := $(patsubst %.cpp, obj/%.o, $(SRC_FILES))
+OBJ_DIR := obj
+OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
+DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 CXX := c++
 CXXFLAGS := -std=c++98 -Wall -Werror -Wextra
 
@@ -13,8 +15,8 @@ $(NAME): $(OBJ_FILES)
 
 obj/%.o: %.cpp
 	@mkdir -p obj
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-	@printf "Object file$(LYELLOW) %s$(NEUTRAL) created !\n" $@
+	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
+-include $(DEPS)
 
 clean:
 	@echo "$(LRED)Removing object files...$(NEUTRAL)"

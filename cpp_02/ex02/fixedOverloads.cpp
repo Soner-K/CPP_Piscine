@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:21:37 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/29 17:12:18 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:46:31 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,26 +20,26 @@ std::ostream&	operator<<(std::ostream& o, const Fixed &rhs)
 
 
 								/*Increment and decrement operators*/
-Fixed&	Fixed::operator++(void)
+Fixed&	Fixed::operator++(void) //prefix
 {
 	this->_val++;
 	return (*this);
 }
 
-Fixed	Fixed::operator++(int)
+Fixed	Fixed::operator++(int) //postfix
 {
 	Fixed	tmp(*this);
 	this->_val++;
 	return (tmp);	
 }
 
-Fixed&	Fixed::operator--(void)
+Fixed&	Fixed::operator--(void) //prefix
 {
 	this->_val--;
 	return (*this);;
 }
 
-Fixed	Fixed::operator--(int)
+Fixed	Fixed::operator--(int) //postfix
 {
 	Fixed	tmp(*this);
 	this->_val--;
@@ -48,26 +48,26 @@ Fixed	Fixed::operator--(int)
 
 
 								/*Comparison operators*/
-bool	Fixed::operator>(const Fixed& rhs) { return (this->_val > rhs._val); }
+bool	Fixed::operator>(const Fixed& rhs) const { return (this->_val > rhs._val); }
 
-bool	Fixed::operator>=(const Fixed& rhs) { return (this->_val >= rhs._val); }
+bool	Fixed::operator>=(const Fixed& rhs) const { return (this->_val >= rhs._val); }
 
-bool	Fixed::operator<(const Fixed& rhs) { return (this->_val < rhs._val); }
+bool	Fixed::operator<(const Fixed& rhs) const { return (this->_val < rhs._val); }
 
-bool	Fixed::operator<=(const Fixed& rhs) { return (this->_val <= rhs._val); }
+bool	Fixed::operator<=(const Fixed& rhs) const { return (this->_val <= rhs._val); }
 
-bool	Fixed::operator==(const Fixed& rhs) { return (this->_val == rhs._val); }
+bool	Fixed::operator==(const Fixed& rhs) const { return (this->_val == rhs._val); }
 
-bool	Fixed::operator!=(const Fixed& rhs) { return (this->_val != rhs._val); }
+bool	Fixed::operator!=(const Fixed& rhs) const { return (this->_val != rhs._val); }
 
 
 
 								/*Arithmetic operators*/
 
-Fixed	Fixed::operator+(const Fixed& rhs) { return (Fixed(this->toFloat() + rhs.toFloat())); }
+Fixed	Fixed::operator+(const Fixed& rhs) const { return (Fixed(this->toFloat() + rhs.toFloat())); }
 
-Fixed	Fixed::operator-(const Fixed &rhs) { return (Fixed(this->toFloat() - rhs.toFloat())); }
+Fixed	Fixed::operator-(const Fixed &rhs) const { return (Fixed(this->toFloat() - rhs.toFloat())); }
 
-Fixed	Fixed::operator*(const Fixed &rhs) { return (Fixed(this->toFloat() * rhs.toFloat())); }
+Fixed	Fixed::operator*(const Fixed &rhs) const { return (Fixed(this->toFloat() * rhs.toFloat())); }
 
-Fixed	Fixed::operator/(const Fixed &rhs) { return (Fixed(this->toFloat() / rhs.toFloat())); }
+Fixed	Fixed::operator/(const Fixed &rhs) const { return (Fixed(this->toFloat() / rhs.toFloat())); }

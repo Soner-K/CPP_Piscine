@@ -6,34 +6,52 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:57:37 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/29 15:16:26 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:50:09 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-int	main(void)
+# define MY_OPERATORS std::cout << GREY << "\t\t\t\tMY OPERATORS" << NEUTRAL << "\n";
+
+// int	main(void)
+// {
+// 	Fixed a;
+// 	Fixed const b(Fixed(5.05f) * Fixed(2));
+
+// 	std::cout << a << std::endl;
+// 	std::cout << ++a << std::endl;
+// 	std::cout << a << std::endl;
+// 	std::cout << a++ << std::endl;
+// 	std::cout << a << std::endl;
+// 	std::cout << b << std::endl;
+// 	std::cout << Fixed::max(a, b) << std::endl;
+
+// 	return 0;
+// }
+
+int main(void)
 {
-	Fixed a;
-	Fixed const b(10);
-	Fixed const c(42.42f);
-	Fixed const d(b);
-	a = Fixed(1234.4321f);
+	Fixed	a(7.5f);
+	Fixed	b(10.5f);
 
-	std::cout << "a is " << a << std::endl;
-	std::cout << "b is " << b << std::endl;
-	std::cout << "c is " << c << std::endl;
-	std::cout << "d is " << d << std::endl;
+	std::cout << "a is : " << a << std::endl;
+	std::cout << "b is : " << b << std::endl;
 
-	std::cout << "a is " << a.toInt() << " as integer" << std::endl;
-	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
-	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
-	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+					MY_OPERATORS
 
-	std::cout << "a is " << a.toFloat() << " as float" << std::endl;
-	std::cout << "b is " << b.toFloat() << " as float" << std::endl;
-	std::cout << "c is " << c.toFloat() << " as float" << std::endl;
-	std::cout << "d is " << d.toFloat() << " as float" << std::endl;
-
-	return (0);
+	std::cout << "a > b : " << (a > b) << std::endl;
+	std::cout << "a >= b : " << (a >= b) << std::endl;
+	std::cout << "a < b : " << (a < b) << std::endl;
+	std::cout << "a <= b : " << (a <= b) << std::endl;
+	std::cout << "a == b : " << (a == b) << std::endl;
+	std::cout << "a != b : " << (a != b) << std::endl;
+	std::cout << "a + 10 : " << (a + 10) << std::endl;
+	std::cout << "a - 10 : " << (a - 10) << std::endl;
+	std::cout << "a * 10 : " << (a * 10) << std::endl;
+	std::cout << "a / 10 : " << (a / 10) << std::endl;
+	std::cout << "a++ : " << a++ << " Now a is : " << a << std::endl;
+	std::cout << "++a : " << ++a << " Now a is : " << a << std::endl;
+	std::cout << "a-- : " << a-- << " Now a is : " << a << std::endl;
+	std::cout << "--a : " << --a << " Now a is : " << a << std::endl;
 }
