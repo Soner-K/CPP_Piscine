@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:57:24 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/02 13:36:04 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:18:01 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,7 @@ Fixed&		Fixed::operator=(const Fixed& rhs)
 /*geter and seter*/
 int			Fixed::getRawBits(void) const { return (this->_val); }
 
-void		Fixed::setRawBits(int const raw)
-{
-	this->_val = raw;
-	return ;
-}
+void		Fixed::setRawBits(int const raw) { this->_val = raw; }
 
 /*Other*/
 float		Fixed::toFloat(void)const

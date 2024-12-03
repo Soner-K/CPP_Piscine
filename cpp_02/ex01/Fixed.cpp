@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:57:24 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/11/29 15:42:58 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:18:22 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,9 @@ Fixed&	Fixed::operator=(const Fixed& rhs)
 }
 
 /*geter and seter*/
-int		Fixed::getRawBits(void) const
-{
-	return (this->_val);
-}
+int		Fixed::getRawBits(void) const { return (this->_val); }
 
-void	Fixed::setRawBits(int const raw)
-{
-	this->_val = raw;
-	return ;
-}
+void	Fixed::setRawBits(int const raw) { this->_val = raw; }
 
 /*Other*/
 float	Fixed::toFloat(void)const
@@ -82,7 +75,10 @@ float	Fixed::toFloat(void)const
 	return (result);
 }
 
-int		Fixed::toInt(void) const
+int		Fixed::toInt(void) const { return ((int)this->_val / (1 << this->_fixedDecimalBits)); }
+
+std::ostream& operator<<(std::ostream& o, const Fixed& rhs)
 {
-	return ((int)this->_val / (1 << this->_fixedDecimalBits));
+	o << rhs.toFloat();
+	return (o);
 }
