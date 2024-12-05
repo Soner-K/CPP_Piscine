@@ -1,5 +1,5 @@
-NAME := ClapTrap00
-SRC_FILES := main.cpp ClapTrap.cpp
+NAME := ScavTrap
+SRC_FILES := main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)

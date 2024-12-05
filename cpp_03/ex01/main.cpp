@@ -6,29 +6,37 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:34:00 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/05 19:12:24 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:27:52 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main(void)
 {
-	ClapTrap	Soner("Soner");
-	ClapTrap	SonerCopy(Soner);
+	ClapTrap	Clappy("Clappy");
+	ClapTrap	ClappyCopy(Clappy);
 	ClapTrap	Player("Player");
-	ClapTrap	Default;
 
-	Soner.attack("Enemy");
-	Soner.beRepaired(UINT_MAX);
-	Soner.beRepaired(10);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(50);
-	Soner.attack("Enemy");
-	Soner.beRepaired(100);
+	Clappy.attack("Enemy");
+	Clappy.beRepaired(UINT_MAX);
+	Clappy.beRepaired(10);
+	Clappy.takeDamage(5);
+	Clappy.takeDamage(5);
+	Clappy.takeDamage(5);
+	Clappy.takeDamage(5);
+	Clappy.takeDamage(50);
+	Clappy.attack("Enemy");
+	Clappy.beRepaired(100);
 	for (__int8_t i = 0; i < 11; i++)
 		Player.attack("Life");
+	
+	ScavTrap	Scavy("Scavy");
+	Scavy.beRepaired(45);
+	// for (__int8_t i = 0; i < 50; i++)
+	// 	Scavy.attack("Clappy");
+	Scavy.takeDamage(UINT_MAX);
+	Scavy.beRepaired(45);
+	Scavy.takeDamage(UINT_MAX);
 }
