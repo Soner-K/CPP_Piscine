@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:20:16 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/05 20:26:01 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:31:42 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void ScavTrap::attack(const std::string& target)
 	{
 		std::cout
 		<< GREY << this->_name << NEUTRAL
-		<< " don't have enough energy points to attack\n" << NEUTRAL; 
+		<< " don't have enough energy points to attack\n"; 
 		return ;
 	}
 	if (this->_hitPoints == 0)
@@ -71,7 +71,7 @@ void ScavTrap::attack(const std::string& target)
 		<< "ScavTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't attack\n" << NEUTRAL; 
+		<< "and can't attack\n"; 
 		return ;	
 	}
 	this->_energyPoints--;

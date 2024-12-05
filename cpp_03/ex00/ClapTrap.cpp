@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/05 19:26:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:32:25 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void ClapTrap::attack(const std::string& target)
 	{
 		std::cout
 		<< GREY << this->_name << NEUTRAL
-		<< " don't have enough energy points to attack\n" << NEUTRAL; 
+		<< " don't have enough energy points to attack\n"; 
 		return ;
 	}
 	if (this->_hitPoints == 0)
@@ -65,7 +65,7 @@ void ClapTrap::attack(const std::string& target)
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't attack\n" << NEUTRAL; 
+		<< "and can't attack\n"; 
 		return ;	
 	}
 	this->_energyPoints--;
@@ -114,7 +114,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		std::cout
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
-		<< " has no energy left to regenerate :((((\n" << NEUTRAL; 
+		<< " has no energy left to regenerate :((((\n"; 
 		return ;	
 	}
 	if (this->_hitPoints == 0)
@@ -123,7 +123,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't be repaired\n" << NEUTRAL; 
+		<< "and can't be repaired\n"; 
 		return ;	
 	}
 	if ((UINT_MAX - amount) < this->_hitPoints) //overflow

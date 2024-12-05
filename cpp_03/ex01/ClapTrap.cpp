@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/05 19:25:43 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:31:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void ClapTrap::attack(const std::string& target)
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't attack\n" << NEUTRAL; 
+		<< "and can't attack\n";
 		return ;	
 	}
 	this->_energyPoints--;
@@ -114,7 +114,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		std::cout
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
-		<< " has no energy left to regenerate :((((\n" << NEUTRAL; 
+		<< " has no energy left to regenerate :((((\n"; 
 		return ;	
 	}
 	if (this->_hitPoints == 0)
