@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/04 15:34:00 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 15:39:31 by sokaraku         ###   ########.fr       */
+/*   Created: 2024/12/05 18:16:29 by sokaraku          #+#    #+#             */
+/*   Updated: 2024/12/06 19:56:32 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "ClapTrap.hpp"
 
-int main(void)
+class ScavTrap : public ClapTrap
 {
-	ClapTrap	Soner("Soner");
-	ClapTrap	SonerCopy(Soner);
-	ClapTrap	Player("Player");
-	ClapTrap	Default;
+public:
+					ScavTrap( void );
+	 				~ScavTrap( void );
+					ScavTrap(const ScavTrap& Other);
+		ScavTrap& 	operator=(const ScavTrap& rhs);
 
-	Soner.attack("Enemy");
-	Soner.beRepaired(UINT_MAX);
-	Soner.beRepaired(10);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(5);
-	Soner.takeDamage(50);
-	Soner.attack("Enemy");
-	Soner.beRepaired(100);
-	for (__int8_t i = 0; i < 11; i++)
-		Player.attack("Life");
-	std::cout << "\n";
-}
+					ScavTrap(const std::string name);
+
+		void		attack(const std::string& target);
+		void		guardGate(void) const;
+		
+};

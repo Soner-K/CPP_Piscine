@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/05 20:31:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:17:03 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ ClapTrap::ClapTrap() : _hitPoints(10), _energyPoints(10), _attackDamage(0)
 	return ;
 }
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
+ClapTrap::ClapTrap(const std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout
 	<< "ClapTrap's parameterized constructor called\n";
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoint
 ClapTrap::ClapTrap(const ClapTrap& Other)
 {
 	std::cout
-	<< "ClapTrap's constructor called\n";
+	<< "ClapTrap's copy constructor called\n";
 	*this = Other;
 	return ;
 }
@@ -48,7 +48,7 @@ ClapTrap&	ClapTrap::operator=(const ClapTrap &rhs)
 	return (*this);
 }
 
-ClapTrap::~ClapTrap(void) { std::cout << "ClapTrap's destructor called\n"; }
+ClapTrap::~ClapTrap(void) { std::cout << "ClapTrap " << GREY << this->_name << NEUTRAL << " destructor called\n"; }
 
 void ClapTrap::attack(const std::string& target)
 {
@@ -92,7 +92,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	{
 		std::cout
 		<< RED << "Oh no " << NEUTRAL
-		<< "After receiving " << RED << amount << NEUTRAL << " damages, "
+		<< "after receiving " << RED << amount << NEUTRAL << " damages, "
 		<< "ClapTrap " << GREY << this->_name << NEUTRAL
 		<< " has now 0 hit points :(\n";
 		this->_hitPoints = 0;
@@ -135,6 +135,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	}
 	this->_energyPoints--;
 	std::cout
+	<< "ClapTrap "
 	<< GREY << this->_name << NEUTRAL << " regenerates itself by "
 	<< GREEN << amount << NEUTRAL << " points\n";
 	this->_hitPoints += amount;

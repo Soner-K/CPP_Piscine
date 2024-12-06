@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:22 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/06 19:16:37 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ ClapTrap::ClapTrap(const ClapTrap& Other)
 ClapTrap&	ClapTrap::operator=(const ClapTrap &rhs)
 {
 	std::cout
-	<< "ClapTrap's copy assignment operator called\n";
+	<< "ClapTrap's assignment operator called\n";
 	if (this != &rhs)
 	{
 		this->_name = rhs._name;
@@ -56,7 +56,7 @@ void ClapTrap::attack(const std::string& target)
 	{
 		std::cout
 		<< GREY << this->_name << NEUTRAL
-		<< " don't have enough energy points to attack\n"; 
+		<< " don't have enough energy points to attack\n" << NEUTRAL; 
 		return ;
 	}
 	if (this->_hitPoints == 0)
@@ -65,7 +65,7 @@ void ClapTrap::attack(const std::string& target)
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't attack\n"; 
+		<< "and can't attack\n";
 		return ;	
 	}
 	this->_energyPoints--;
@@ -123,7 +123,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		<< "ClapTrap "
 		<< GREY << this->_name << NEUTRAL
 		<< " is " << MAGENTA << "dead " << NEUTRAL
-		<< "and can't be repaired\n"; 
+		<< "and can't be repaired\n" << NEUTRAL; 
 		return ;	
 	}
 	if ((UINT_MAX - amount) < this->_hitPoints) //overflow

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:44:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:58 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/06 18:17:43 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <iostream>
 # include <climits>
 # include <limits.h>
-# include <string>
 
 # define BLUE "\033[1;34m"
 # define RED "\033[1;31m"
@@ -40,7 +39,7 @@ public:
 
 						ClapTrap(const std::string name);
 
-	void				attack(const std::string& target);
+			void		attack(const std::string& target);
 			void		takeDamage(unsigned int amount);
 			void		beRepaired(unsigned int amount);
 };
