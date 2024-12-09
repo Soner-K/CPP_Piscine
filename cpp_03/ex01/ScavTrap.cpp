@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 19:20:16 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 19:56:12 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:01:17 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void ScavTrap::attack(const std::string& target)
 	<< " attacks target "
 	<< GREY << target << NEUTRAL
 	<< " and inflicts " << RED << this->_attackDamage << NEUTRAL
-	<< " hit points\n";
+	<< " damages\n";
 	return ;
 }
 

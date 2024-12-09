@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:34:00 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 19:43:46 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:51:32 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,24 @@ int main(void)
 	// ClapTrap *ptr = new ScavTrap("TEST");
 	// delete ptr;							//virtual keyword needed to call the destructors of both base and derived class
 
+	std::cout << MAGENTA << "CONSTRUCTION" << NEUTRAL << "\n\n";
 	DiamondTrap		Dim("Dim");
 	DiamondTrap		DimCopy(Dim);
 	DiamondTrap		Default;
+
+	std::cout << MAGENTA << "\nWhoAmI" << NEUTRAL << "\n\n";
+	Dim.whoAmI();
+	DimCopy.whoAmI();
+	Default.whoAmI();
+	
+	std::cout << MAGENTA << "\nBASE FUNCTIONS" << NEUTRAL << "\n\n";
+	Dim.attack("Dom");
+	Dim.beRepaired(10);
+	Dim.takeDamage(10);
+	
+	std::cout << MAGENTA << "\nSCAVTRAP GATE" << NEUTRAL << "\n\n"; 
+	Dim.guardGate();
+	std::cout << MAGENTA << "\nFRAGTRAP HIGH FIVES" << NEUTRAL << "\n\n";
+	Dim.highFivesGuys();
+	std::cout << MAGENTA << "\nDESTRUCTORS" << NEUTRAL << "\n\n";
 }

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:33:50 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 18:17:22 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:00:26 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void ClapTrap::attack(const std::string& target)
 	<< " attacks target "
 	<< GREY << target << NEUTRAL
 	<< " and inflicts " << RED << this->_attackDamage << NEUTRAL
-	<< " hit points\n";
+	<< " damages\n";
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)

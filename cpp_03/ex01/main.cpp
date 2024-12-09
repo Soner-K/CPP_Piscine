@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 15:34:00 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 16:06:38 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:05:09 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(void)
 	ScavTrap	Scavy("Scavy");
 	Scavy.beRepaired(45);
 	Scavy.attack("Clappy");
+	Scavy.guardGate();
 	// for (__int8_t i = 0; i < 50; i++)
 	// 	Scavy.attack("Clappy");
 	Scavy.takeDamage(UINT_MAX);

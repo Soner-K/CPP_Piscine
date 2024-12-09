@@ -4,7 +4,7 @@ OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)
 CXX := c++
-CXXFLAGS := -std=c++98 -Wall -Werror -Wextra
+CXXFLAGS := -std=c++98 -Wall -Werror -Wextra -Wshadow
 
 all: $(NAME)
 

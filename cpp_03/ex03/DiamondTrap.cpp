@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 17:35:16 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/06 19:47:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:27:24 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ DiamondTrap&	DiamondTrap::operator=(const DiamondTrap& rhs)
 	return (*this);
 }
 
+/*
+FragTrap and ScavTrap will have <name + "_clap_name" because they inherit _name from ClapTrap
+(they don't have their own name attribute)
+*/
 DiamondTrap::DiamondTrap(const std::string name) : ClapTrap(name + "_clap_name"), FragTrap(name), ScavTrap(name)
 {
 	std::cout
@@ -66,5 +70,10 @@ void	DiamondTrap::attack(const std::string& target)
 
 void	DiamondTrap::whoAmI( void ) const
 {
+	std::cout 
+	<< "DiamondTrap's name is : " 
+	<< GREY << this->_name << NEUTRAL
+	<< " and it's ClapTrap name is "
+	<< GREY << ClapTrap::_name << NEUTRAL << "\n";
 	return ;
 }
