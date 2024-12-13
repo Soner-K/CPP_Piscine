@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:53:24 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 20:37:04 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:34:03 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ Cat&	Cat::operator=(const Cat& rhs)
 	std::cout
 	<< "Cat's assignment operator called\n";
 	if (this != &rhs)
+	{
 		this->_type = rhs._type;
+		this->_brainPtr = new Brain(*rhs._brainPtr);
+	}
 	return (*this);
 }
 
@@ -63,4 +66,6 @@ void	Cat::showAllIdeas( void ) const
 	return ;
 }
 
-void	Cat::printIdea(int index) const { std::cout << this->_brainPtr->getIdea(index); }
+void	Cat::printIdea(int index) const { std::cout << this->_brainPtr->getIdea(index) << "\n"; }
+
+void	Cat::printAddressIdea(int index) const { std::cout << std::hex << BLUE << this->_brainPtr->getAddress(index) << NEUTRAL << "\n"; }

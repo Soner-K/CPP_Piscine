@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:03:29 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 20:50:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:47:39 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ Dog&	Dog::operator=(const Dog& rhs)
 	std::cout
 	<< "Dog's assignment operator called\n";
 	if (this != &rhs)
+	{
 		this->_type = rhs._type;
+		this->_brainPtr = new Brain(*rhs._brainPtr);
+	}
 	return (*this);
 }
 
@@ -63,4 +66,6 @@ void	Dog::showAllIdeas( void ) const
 	return ;
 }
 
-void	Dog::printIdea(int index) const { std::cout << this->_brainPtr->getIdea(index); }
+void	Dog::printIdea(int index) const { std::cout << this->_brainPtr->getIdea(index) << "\n"; }
+
+void	Dog::printAddressIdea(int index) const { std::cout << std::hex << BLUE << this->_brainPtr->getAddress(index) << NEUTRAL << "\n"; }

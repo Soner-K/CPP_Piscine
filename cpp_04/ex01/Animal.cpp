@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:46 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 20:39:38 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:40:35 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,5 @@ std::string	Animal::getType( void ) const { return (this->_type) ; }
 void	Animal::showAllIdeas( void ) const { return ;}
 
 void	Animal::printIdea( int index ) const { return ((void) index) ;}
+
+void	Animal::printAddressIdea( int index ) const { return ((void) index); }

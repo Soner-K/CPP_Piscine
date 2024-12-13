@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:49 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 17:26:12 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:06:15 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,13 @@ class Animal
 protected:
 					std::string		_type;
 public:
+									/*Coplian form*/
 									Animal( void );
 			virtual					~Animal( void );
 									Animal(const Animal& Other);
 					Animal&			operator=(const Animal& rhs);
+
+									/*Methods*/
 			virtual void			makeSound( void ) const;
-			virtual	std::string		getType( void ) const;
+			std::string				getType( void ) const;
 };

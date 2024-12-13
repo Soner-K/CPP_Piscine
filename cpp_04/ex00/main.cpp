@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:08:11 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 17:56:33 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 11:07:41 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,15 @@ int main(void)
 	std::cout << MAGENTA << "\n\t\t\tDESTRUCTORS...\n\n" << NEUTRAL;
 
 	delete cat;
+	std::cout << "\n";
 	delete dog;
+	std::cout << "\n";
 	delete animal;
+	std::cout << "\n";
 	delete failure;
+	std::cout << "\n";
 	delete catFailure;
+	std::cout << "\n";
 	delete wrongCat;
+	std::cout << "\n";
 }

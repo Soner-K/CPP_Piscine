@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:48:27 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/12 19:46:12 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/13 10:20:30 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ Brain::Brain( void )
 	"Brain's default constructor called\n";
 	srand(time(0));
 	static std::string	source[20] = {
-		"1", "2", "3", "4", "5",
-		"6", "7", "8", "9", "10",
-		"11", "12", "13", "14", "15",
-		"16", "17", "18", "19", "20"
+		"Potatoes", "Rice", "Pasta", "Bread", "FOOD",
+		"Ketchup", "Mustard", "Mayo", "Algerian sauce", "Harissa",
+		"Ginger", "Green Onions", "Peppers", "Onions", "Garlic",
+		"Salt", "Pepper", "Paprika", "Cumin", "Dill"
 	};
 
 	for (int i = 0; i < 100; i++)
@@ -56,4 +56,11 @@ std::string	Brain::getIdea(int index) const
 	if (index < 0)
 		index *= -1;
 	return (this->ideas[index % 100]);
+}
+
+unsigned long	Brain::getAddress(int index) const
+{
+	if (index < 0)
+		index *= -1;
+	return ((unsigned long)(&this->ideas[index % 100]));
 }
