@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 17:08:11 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 15:58:22 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:23:37 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,21 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-# define MAX_NUMBER_ANIMALS 6
+#define MAX_NUMBER_ANIMALS 6
 
 int	main(void)
 {
+	/*Check for double free*/
+	// Cat cat1;
+	// Cat cat2(cat1);
+	// cat2 = cat1;
+	// return (0);
+
 	// AbstractAnimal	notCompiling; // Won't compile
-	AbstractAnimal *animals[MAX_NUMBER_ANIMALS]; // allocates array for MAX_NUMBER_ANIMALS pointers to Animal
+	AbstractAnimal *animals[MAX_NUMBER_ANIMALS];
+	// allocates array for MAX_NUMBER_ANIMALS pointers to Animal
 
 	std::cout << MAGENTA << "\t\t\tCONSTRUCTING INSTANCES...\n\n" << NEUTRAL;
-
 
 	/*instantiates each pointer of the animals' array*/
 	for (int i = 0; i < MAX_NUMBER_ANIMALS; i++)

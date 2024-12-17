@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:02:35 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 16:14:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:09:28 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,25 @@ Character::~Character( void )
 
 Character::Character(const Character& Other)
 {
-	if (this != &Other)
-		*this = Other;
+	if (this == &Other)
+		return ;
+	this->_numberItems = Other._numberItems;
+	for (int i = 0; i < INVENTORY_MAX_SIZE; i++)
+	{
+		if (Other._inventory[i])
+			this->_inventory[i] = Other._inventory[i]->clone();
+		else
+			this->_inventory[i] = NULL;
+	}
+	this->_sizeItemsToDelete = Other._sizeItemsToDelete;
+	this->_itemsToDelete = new AMateria*[VECTOR_MAX_SIZE];
+	for (int i = 0; i < VECTOR_MAX_SIZE; i++)
+	{
+		if (Other._itemsToDelete[i])
+			this->_itemsToDelete[i] = Other._itemsToDelete[i]->clone();
+		else
+			this->_itemsToDelete[i] = NULL;
+	}
 	return ;	
 }
 

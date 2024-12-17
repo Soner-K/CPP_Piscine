@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:00:59 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 16:04:27 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:53:36 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,25 @@ MateriaSource::~MateriaSource()
 	return ;
 }
 
+/*not calling overloaded "=" to avoid leaks amd/or condiational jumps
+overloaded "=" doesn't differentiate between newly created instances and already existing ones,
+so, for an instance being created, the materias' array can't be checked for NULL before deleting 
+(conditional jump).
+*/
 MateriaSource::MateriaSource(const MateriaSource& Other)
 {
-	*this = Other;
+	if (this == &Other)
+		return ;
+
+	this->_numberMateria = Other._numberMateria;
+
+	for (int i = 0; i < SOURCE_MAX_SIZE; i++)
+	{
+		if (Other._materias[i])
+			this->_materias[i] = Other._materias[i]->clone();
+		else
+			this->_materias[i] = NULL;
+	}
 	return ;
 }
 
@@ -42,8 +58,12 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& rhs)
 	this->_numberMateria = rhs._numberMateria;
 	for (int i = 0; i < SOURCE_MAX_SIZE; i++)
 	{
+		if (this->_materias[i])
+			delete this->_materias[i];
 		if (rhs._materias[i])
-			this->_materias[i] = rhs._materias[i];
+			this->_materias[i] = rhs._materias[i]->clone();
+		else
+			this->_materias[i] = NULL;
 	}
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:53:24 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/13 11:48:55 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 18:20:23 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,22 @@ Cat::~Cat( void )
 	delete this->_brainPtr;
 }
 
-Cat::Cat(const Cat& Other) : AbstractAnimal(Other)
+Cat::Cat(const Cat& Other) : AbstractAnimal(Other) //Copy constructor does deep copy.
 {
 	std::cout
 	<< "Cat's copy constructor called\n";
-	*this = Other;
+	this->_type = Other._type;
+	this->_brainPtr = new Brain(*Other._brainPtr);
 	return ;
 }
 
-Cat&	Cat::operator=(const Cat& rhs)
+Cat&	Cat::operator=(const Cat& rhs) //Operator deletes before storing new brain, to avoid leaks
 {
 	std::cout
 	<< "Cat's assignment operator called\n";
 	if (this != &rhs)
 	{
+		delete this->_brainPtr;
 		this->_type = rhs._type;
 		this->_brainPtr = new Brain(*rhs._brainPtr);
 	}

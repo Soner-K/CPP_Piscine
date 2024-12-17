@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:47:10 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 14:52:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 19:09:51 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,30 @@ void	materiaSource()
 	delete src;
 }
 
+void	copyConstructors()
+{
+	std::cout << YELLOW << "\ncopyConstructors function called\n\n" << NEUTRAL;
+	MateriaSource	original;
+	original.learnMateria(new Ice());
+	AMateria* tmp = original.createMateria("ice");
+
+	MateriaSource	copy(original);
+	MateriaSource	test(copy);
+
+	Character	player1;
+	Character	player2(player1);
+	Character	player3;
+
+	player3 = player1;
+	test = copy;
+	delete tmp;
+}
+
 int	main(void)
 {
 	mandatoryTests();
 	complementaryTests();
 	equippingManyMaterias();
 	materiaSource();
+	copyConstructors();
 }
