@@ -16,13 +16,18 @@
 #include "AMateria.hpp"
 
 #define INVENTORY_MAX_SIZE 4
+#define	VECTOR_MAX_SIZE	8
 
 class Character : public ICharacter
 {
 private:
 			std::string		_name;
+			
 			AMateria*		_inventory[INVENTORY_MAX_SIZE];
 			int				_numberItems;
+
+			AMateria**		_itemsToDelete;
+			short int		_sizeItemsToDelete;
 
 public:
 						/* Coplien form */
@@ -41,5 +46,12 @@ public:
 			void			equip(AMateria* m);
 			void			unequip(int idx);
 			void			use(int idx, ICharacter& target);
+
+						/*Vector*/
 			void			clearInventory( void );
+			void			clearVector(bool fullDelete);
+			void			push(AMateria *m);
+
+						/*For testing purposes*/
+			void			printMateriaAddresses( void ) const;
 };

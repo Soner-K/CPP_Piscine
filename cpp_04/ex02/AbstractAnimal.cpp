@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:46 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/13 11:37:30 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:41:38 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,3 @@ void	AbstractAnimal::makeSound( void ) const
 }
 
 std::string	AbstractAnimal::getType( void ) const { return (this->_type) ; }
-
-
-void	AbstractAnimal::showAllIdeas( void ) const { return ;}
-
-void	AbstractAnimal::printIdea( int index ) const { return ((void) index) ;}
-
-void	AbstractAnimal::printAddressIdea( int index ) const { return ((void) index); }

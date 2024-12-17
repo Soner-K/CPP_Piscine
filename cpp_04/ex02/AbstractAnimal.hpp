@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:49 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/13 11:49:07 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:35:23 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "Brain.hpp"
 
 /*
-All derived class must implement the pure virtual functions, otherwise they
+All derived classes must implement the pure virtual functions, otherwise they
 become abstract too.
 */
 class AbstractAnimal
@@ -32,7 +32,7 @@ public:
 					AbstractAnimal&			operator=(const AbstractAnimal& rhs);
 
 									/*Methods*/
-			virtual void			makeSound( void ) const = 0;
+			virtual void			makeSound( void ) const;
 			std::string				getType( void ) const;
 
 			virtual	void			showAllIdeas( void ) const = 0;

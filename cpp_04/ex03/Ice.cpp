@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 15:36:44 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/15 15:37:19 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 10:50:31 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ AMateria*		Ice::clone( void ) const {return (new Ice(*this));}
 void	Ice::use(ICharacter& target)
 {
 	std::cout
-	<< "* shoots an ice bolt at "
+	<< "* shoots an " << BLUE << "ice " << NEUTRAL << "bolt at "
 	<< GREY << target.getName() << NEUTRAL
 	<< " *\n";
 	return ;
