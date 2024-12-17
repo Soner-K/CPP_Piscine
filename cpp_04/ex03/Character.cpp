@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:02:35 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 14:36:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:14:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ Character&	Character::operator=(const Character& rhs)
 	for (int i = 0; i < rhs._numberItems; i++)
 	{
 		if (rhs._inventory[i])
-			this->_inventory[i] = rhs._inventory[i]->clone(); //pointers are stored so deep copy
+			this->_inventory[i] = rhs._inventory[i]->clone(); //return new pointer to allow for deep copy
 	}
 	
 	/*Copying vector of items to delete at destruction*/
