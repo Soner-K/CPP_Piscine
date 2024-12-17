@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:46 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/15 14:41:38 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:58:00 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ AbstractAnimal&	AbstractAnimal::operator=(const AbstractAnimal& rhs)
 	if (this != &rhs)
 		this->_type = rhs._type;
 	return (*this);
-}
-
-void	AbstractAnimal::makeSound( void ) const
-{
-	std::cout
-	<< "An " << GREY << "AbstractAnimal " << NEUTRAL
-	<< "is making a sound\n";
 }
 
 std::string	AbstractAnimal::getType( void ) const { return (this->_type) ; }

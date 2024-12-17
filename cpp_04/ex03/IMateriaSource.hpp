@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:01:09 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/15 19:02:55 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:02:21 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ class IMateriaSource
 {
 public:
 	virtual 				~IMateriaSource() {}
-	virtual void 			learnMateria(AMateria*) = 0;
-	virtual AMateria* 		createMateria(std::string const & type) = 0;	
+	virtual void 			learnMateria(AMateria* m) = 0;
+	virtual AMateria* 		createMateria(const std::string& type) = 0;	
 };

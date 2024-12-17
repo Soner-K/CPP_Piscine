@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 19:00:59 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/17 14:48:06 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 16:04:27 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ MateriaSource::MateriaSource() : _numberMateria(0)
 
 MateriaSource::~MateriaSource()
 {
-	for (int i = 0; i < SOURCE_MAX_SIZE; i++) //double free ?
+	for (int i = 0; i < SOURCE_MAX_SIZE; i++)
 	{
 		if (this->_materias[i])
 			delete this->_materias[i];
@@ -40,9 +40,9 @@ MateriaSource&	MateriaSource::operator=(const MateriaSource& rhs)
 	if (this == &rhs)
 		return (*this);
 	this->_numberMateria = rhs._numberMateria;
-	for (int i = 0; i < SOURCE_MAX_SIZE; i++) //use _numberMateria?
+	for (int i = 0; i < SOURCE_MAX_SIZE; i++)
 	{
-		if (rhs._materias[i]) //leaks?
+		if (rhs._materias[i])
 			this->_materias[i] = rhs._materias[i];
 	}
 	return (*this);

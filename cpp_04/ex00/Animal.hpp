@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:20:49 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/13 11:06:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/17 15:47:19 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 #include <iostream>
 #include "colors.hpp"
-
-/*Should the coplian form be virtual too ?*/
 
 class Animal
 {
@@ -30,5 +28,5 @@ public:
 
 									/*Methods*/
 			virtual void			makeSound( void ) const;
-			std::string				getType( void ) const;
+					std::string		getType( void ) const;
 };
