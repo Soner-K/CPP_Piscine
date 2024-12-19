@@ -1,5 +1,6 @@
-NAME := Form
-SRC_FILES := main.cpp Bureaucrat.cpp Form.cpp
+NAME := Hell
+SRC_FILES := main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
+			 RobotomyRequestForm.cpp ShrubberyCreationForm.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)

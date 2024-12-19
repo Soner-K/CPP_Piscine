@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:24:23 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 16:03:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/19 18:11:50 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include <iostream>
 #include <exception>
 #include "colors.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 /*to avoid circular dependency*/
-class Form;
+class AForm;
 
 # define HIGHEST_GRADE 1
 # define LOWEST_GRADE 150
@@ -45,7 +45,7 @@ public:
 							/*Others*/
 						void			increaseGrade( void );
 						void			decreaseGrade( void );
-						void			signForm(Form& form);
+						void			signForm(AForm& form);
 	
 							/*Exceptions*/
 			class GradeTooHighException : public std::exception

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:24:14 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 17:08:43 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/19 19:58:45 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(LOWEST_GRADE) {}
 
 Bureaucrat::~Bureaucrat() {}
 
-Bureaucrat::Bureaucrat(const Bureaucrat& Other) :_name(Other._name) { *this = Other; }
+Bureaucrat::Bureaucrat(const Bureaucrat& Other) { *this = Other; }
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& rhs)
 {
@@ -60,15 +60,15 @@ void	Bureaucrat::decreaseGrade()
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Bureaucrat's grade is too high");
+	return ("error: Bureaucrat's grade is too high");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Bureaucrat's grade is too low");
+	return ("error: Bureaucrat's grade is too low");
 }
 
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& form)
 {
 	try
 	{

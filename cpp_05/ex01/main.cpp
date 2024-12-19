@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:40 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/18 15:31:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:35:09 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	instanciationTests( void )
 
 	try 
 	{
-		std::cout << "Trying to create a Bureaucrat with a grade of 200\n";
-		Bureaucrat Dwight("Dwight", 200);
+		std::cout << "Trying to create a Form with a signing grade of 200\n";
+		Form apl("APL", 200, 15);
 	}
 	catch(const std::exception& e)
 	{
@@ -27,24 +27,18 @@ void	instanciationTests( void )
 	}
 	try
 	{
-		std::cout << "Trying to create a Bureaucrat with a grade of 0\n";
-		Bureaucrat Michael("Michael", 0);
+		std::cout << "Trying to create a Form with a signing grade of 0\n";
+		Form apl("APL", 0, 15);
+
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
-}
-
-void	gradeEvolutionTests( void )
-{
-	std::cout << YELLOW << "\t\t\tgradeEvolutionTests() called\n\n" << NEUTRAL;
-
 	try 
 	{
-		std::cout << "Trying to increase a Bureaucrat's grade (initial grade 1)\n";
-		Bureaucrat Michael("Michael", 1);
-		Michael.increaseGrade();
+		std::cout << "Trying to create a Form with an executing grade of 200\n";
+		Form apl("APL", 15, 200);
 	}
 	catch(const std::exception& e)
 	{
@@ -52,9 +46,9 @@ void	gradeEvolutionTests( void )
 	}
 	try
 	{
-		std::cout << "Trying to decrease a Bureaucrat's grade (initial grade 150)\n";
-		Bureaucrat Dwight("Dwight", 150);
-		Dwight.decreaseGrade();
+		std::cout << "Trying to create a Form with an executing grade of 0\n";
+		Form apl("APL", 15, 0);
+
 	}
 	catch(const std::exception& e)
 	{
@@ -62,29 +56,42 @@ void	gradeEvolutionTests( void )
 	}
 }
 
-void	noExceptionTests( void )
+
+void	signingTests( void )
 {
-	std::cout << YELLOW << "\t\t\tnoExceptionTests() called\n\n" << NEUTRAL;
+	std::cout << YELLOW << "\t\t\tsigningTests() called\n\n" << NEUTRAL;
 
 	Bureaucrat	Jim("Jim", 10);
-	std::cout << Jim;
-	
-	std::cout << "Jim got a promotion...\n";
-	Jim.increaseGrade();
-	std::cout << Jim;
-	std::cout << "Jim didn't sign enough forms, now he's demoted...\n";
-	Jim.decreaseGrade();
-	std::cout << Jim;
-	std::cout << "Jim is now retiring with nothing in memory but his workplace, where he'll be forgotten....";
-	
+	Bureaucrat	Default;
+	Form		Paper("b27c", 15, 7);
+
+	std::cout << Jim << '\n' << Default << '\n' << Paper << "\n\n\n";
+	try
+	{
+		Jim.signForm(Paper);
+		Jim.signForm(Paper);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what();
+	}
+	std::cout << '\n';
+	try
+	{
+		Default.signForm(Paper);
+		Default.signForm(Paper);
+		std::cout << '\n';
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 int main(void)
 {
 	instanciationTests();
 	std::cout << '\n';
-	gradeEvolutionTests();
-	std::cout << '\n';
-	noExceptionTests();
+	signingTests();
 	std::cout << '\n';
 }
