@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:40 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 20:53:19 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:54:41 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include "ShrubberyCreationForm.hpp"
 
 Bureaucrat	Boss("Boss", 1);
-Bureaucrat	Manager("Manager", 75);
+Bureaucrat	Manager("Manager", 45);
 Bureaucrat	Employee("Employee", 150);
 
 void	testPresidentialPardonForm( void )
 {
-	std::cout << YELLOW << "\n\t\t\t\t\ttestPresidentialPardonForm() called\n\n" << NEUTRAL;
+	std::cout << YELLOW << "\n\t\t\t\t\ttestPresidentialPardonForm\n\n" << NEUTRAL;
 
 	PresidentialPardonForm	form;
 	try
@@ -66,7 +66,7 @@ void	testPresidentialPardonForm( void )
 
 void	testRobotomyRequestForm( void )
 {
-	std::cout << YELLOW << "\n\t\t\t\t\ttestRobotomyRequestForm() called\n\n" << NEUTRAL;
+	std::cout << YELLOW << "\n\t\t\t\t\ttestRobotomyRequestForm()\n\n" << NEUTRAL;
 
 	RobotomyRequestForm	form;
 	try
@@ -105,6 +105,7 @@ void	testShrubberyCreationForm( void )
 {
 	ShrubberyCreationForm	form;
 
+	std::cout << YELLOW << "\n\t\t\t\t\ttestShrubberyCreationForm()\n\n" << NEUTRAL;
 	try
 	{
 		form.beSigned(Boss);
@@ -116,6 +117,38 @@ void	testShrubberyCreationForm( void )
 	}
 }
 
+void	testExecutionFromBureaucrat( void )
+{
+	std::cout << YELLOW << "\n\t\t\t\t\ttestExecutionFromBureaucrat()\n\n" << NEUTRAL;
+	RobotomyRequestForm		form;
+
+	try
+	{
+		Employee.executeForm(form);
+	}
+	catch(std::exception& e)
+	{
+		std::cerr << e.what() << "\n\n";
+	}
+	try
+	{
+		Manager.executeForm(form);
+	}
+	catch(std::exception& e)
+	{
+		std::cerr << e.what() << "\n\n";
+	}
+	try
+	{
+		Manager.signForm(form);
+		Manager.executeForm(form);
+	}
+	catch(std::exception& e)
+	{
+		std::cerr << e.what() << "\n\n";
+	}
+}
+
 int main(void)
 {
 	std::cout
@@ -124,4 +157,5 @@ int main(void)
 	testPresidentialPardonForm();
 	testRobotomyRequestForm();
 	testShrubberyCreationForm();
+	testExecutionFromBureaucrat();
 }

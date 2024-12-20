@@ -26,8 +26,8 @@ clean:
 
 fclean: clean
 	@echo "$(RED)Removing executable...$(NEUTRAL)"
-	@echo "$(RED)Done !$(NEUTRAL)"
 	rm -f $(NAME)
+	@echo "$(RED)Done !$(NEUTRAL)"
 
 re: fclean all
 

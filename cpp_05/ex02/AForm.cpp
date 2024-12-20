@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:53:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 20:07:20 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:33:02 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	AForm::execute(const Bureaucrat& executor) const
 	if (executor.getGrade() > this->_gradeToExecute)
 		throw Bureaucrat::GradeTooLowException();
 
-	this->executeForm();
+	this->callExecuteConcreteClass();
 }
 
 										/*Print overload operator*/

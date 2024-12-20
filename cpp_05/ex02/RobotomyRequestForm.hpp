@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:34:23 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 18:28:47 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:31:26 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ private:
 			std::string					_target;
 
 protected:
-			void							executeForm( void ) const;
+			void							callExecuteConcreteClass( void ) const;
 
 public:
 						/* Coplien form */

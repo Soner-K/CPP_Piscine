@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:52:19 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 20:16:19 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:51:47 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=(const RobotomyRequestForm& r
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy request", 72, 45), _target(target) {}
 
-void	RobotomyRequestForm::executeForm() const
+void	RobotomyRequestForm::callExecuteConcreteClass() const
 {
 	static bool	seed = false;
 	if (!seed)
@@ -42,7 +42,8 @@ void	RobotomyRequestForm::executeForm() const
 	<< "* drilling noises * "
 	<< (robotomyFailure ?
 	std::string(RED) + "robotomy failed..." + NEUTRAL " on " + std::string(GREY) + this->_target + std::string(NEUTRAL):
-	std::string(GREEN) + "robotomy succeeded..." + NEUTRAL " on " + std::string(GREY) + this->_target + std::string(NEUTRAL));
+	std::string(GREEN) + "robotomy succeeded..." + NEUTRAL " on " + std::string(GREY) + this->_target + std::string(NEUTRAL))
+	<< "\n";
 
 	return ;
 }

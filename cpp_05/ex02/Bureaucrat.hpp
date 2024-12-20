@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:24:23 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 18:11:50 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:33:49 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ public:
 						void			increaseGrade( void );
 						void			decreaseGrade( void );
 						void			signForm(AForm& form);
+						void			executeForm(const AForm& form);
 	
 							/*Exceptions*/
 			class GradeTooHighException : public std::exception

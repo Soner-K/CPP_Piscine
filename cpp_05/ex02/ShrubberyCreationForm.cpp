@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:34:31 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 20:50:47 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:53:06 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=(const ShrubberyCreationF
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery request", 145, 137), _target(target) {}
 
-void	ShrubberyCreationForm::executeForm() const
+void	ShrubberyCreationForm::callExecuteConcreteClass() const
 {
 	std::string		fileName = this->_target + "_shrubbery";
 	std::ofstream	outFile(fileName.c_str());
@@ -38,6 +38,10 @@ void	ShrubberyCreationForm::executeForm() const
 		std::cerr << "Failed to open " << fileName << "\n";
 		return ;
 	}
+	std::cout
+	<< GREY << this->_target << NEUTRAL
+	<< " outputing an ASCII tree...\n";
 	outFile << SHRUBBERY_TREE;
+	outFile.close();
 	return ;
 }

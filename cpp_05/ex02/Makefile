@@ -21,14 +21,15 @@ obj/%.o: %.cpp
 -include $(DEPS)
 
 clean:
-	@echo "$(LRED)Removing object files...$(NEUTRAL)"
+	@echo "$(LRED)Removing object files and other files if needed...$(NEUTRAL)"
 	rm -rf obj
+	rm -f *_shrubbery
 	@echo "$(LRED)Done !$(NEUTRAL)"
 
 fclean: clean
 	@echo "$(RED)Removing executable...$(NEUTRAL)"
-	@echo "$(RED)Done !$(NEUTRAL)"
 	rm -f $(NAME)
+	@echo "$(RED)Done !$(NEUTRAL)"
 
 re: fclean all
 

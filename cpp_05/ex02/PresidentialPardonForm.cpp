@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 17:02:43 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 19:57:52 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:31:44 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=(const PresidentialPard
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Presidential pardon", 25, 5), _target(target) {}
 
-void	PresidentialPardonForm::executeForm() const
+void	PresidentialPardonForm::callExecuteConcreteClass() const
 {
 	std::cout
 	<< GREY << this->_target << NEUTRAL

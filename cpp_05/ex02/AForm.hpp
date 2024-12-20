@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:53:16 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 18:27:10 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/20 08:30:54 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ private:
 		const	int				_gradeToExecute;
 
 protected:
-		virtual void			executeForm( void ) const = 0;
+		virtual void			callExecuteConcreteClass( void ) const = 0;
 
 public:
 						/* Coplien form */
