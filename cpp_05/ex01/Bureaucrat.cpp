@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:24:14 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 17:08:43 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:11:09 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	Bureaucrat::decreaseGrade()
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("Bureaucrat's grade is too high");
+	return ("error: Bureaucrat's grade is too high");
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("Bureaucrat's grade is too low");
+	return ("error: Bureaucrat's grade is too low");
 }
 
 void	Bureaucrat::signForm(Form& form)

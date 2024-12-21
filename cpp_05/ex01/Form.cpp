@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:53:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 16:31:46 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:10:24 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,17 @@ int		Form::getGradeToExecute() const { return (this->_gradeToExecute); }
 											/*Exceptions*/
 const char*	Form::GradeTooHighException::what() const throw()
 {
-	return ("Form's grade is too high");
+	return ("error: Form's grade is too high");
 }
 
 const char*	Form::GradeTooLowException::what() const throw()
 {
-	return ("Form's grade is too low");
+	return ("error: Form's grade is too low");
 }
 
 const char*	Form::FormAlreadySignedException::what() const throw()
 {
-	return ("Form is already signed");
+	return ("error: Form is already signed");
 }
 
 

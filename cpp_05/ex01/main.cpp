@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 17:23:40 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/19 16:35:09 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/21 11:12:08 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	signingTests( void )
 	std::cout << '\n';
 	try
 	{
-		Default.signForm(Paper);
 		Default.signForm(Paper);
 		std::cout << '\n';
 	}
