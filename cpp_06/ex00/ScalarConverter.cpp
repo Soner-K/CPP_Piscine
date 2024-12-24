@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:52:41 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/24 14:38:31 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/24 17:55:33 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,15 @@ ScalarConverter::ScalarConverter(const ScalarConverter& Other) { (void)Other; }
 ScalarConverter&	ScalarConverter::operator=(const ScalarConverter& rhs) { return (void) rhs, *this; }
 
 
-/*
-	- check size of literal
-	- if superior to 126 not representable
-	- check bounds for other values
-	-
-*/
 void	ScalarConverter::convert(const std::string& literal)
 {
 	const char	*c_str = literal.c_str();
 	double		d;
+	size_t		indexOfPoint = literal.find('.');
+	bool		printZero = (indexOfPoint == literal.npos) ? true : false;
 
+	if (indexOfPoint != literal.npos && literal[indexOfPoint + 1] == '0')
+		printZero = false;
 	if ( strlen(c_str) == 1 && !isdigit(*c_str) )
 		d = *c_str;
 	else
@@ -67,7 +65,7 @@ void	ScalarConverter::convert(const std::string& literal)
 
 	/*---------------->   float and double  <-----------------*/
 
-	std::cout << "float: " << f << "f" << "\n";
+	std::cout << "float: " << f << (printZero ? ".0f" : "f") << "\n";
 	std::cout << "double: " << d << "\n";
 	return ;
 }
