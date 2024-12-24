@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 18:06:52 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/23 18:08:02 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/24 14:18:55 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <exception>
 
 class Base
 {

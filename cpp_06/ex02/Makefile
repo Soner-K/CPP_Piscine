@@ -1,4 +1,4 @@
-NAME := ex02
+NAME := Dynamic
 SRC_FILES := main.cpp Base.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))

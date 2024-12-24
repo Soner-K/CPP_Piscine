@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:52:41 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/23 17:07:17 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/24 14:38:31 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ScalarConverter::convert(const std::string& literal)
 	else
 		d = strtod(c_str, NULL);
 
-	float		f = strtof(c_str, NULL);
+	float		f = static_cast<float>(d);
 	int			i = static_cast<int>(d);
 
 	/*---------------->   char  <-----------------*/
