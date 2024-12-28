@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 18:52:41 by sokaraku          #+#    #+#             */
-/*   Updated: 2024/12/24 17:55:33 by sokaraku         ###   ########.fr       */
+/*   Updated: 2024/12/28 15:31:57 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ScalarConverter::convert(const std::string& literal)
 	bool		printZero = (indexOfPoint == literal.npos) ? true : false;
 
 	if (indexOfPoint != literal.npos && literal[indexOfPoint + 1] == '0')
-		printZero = false;
+		printZero = true;
 	if ( strlen(c_str) == 1 && !isdigit(*c_str) )
 		d = *c_str;
 	else
