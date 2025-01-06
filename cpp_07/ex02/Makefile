@@ -1,4 +1,4 @@
-NAME := Iter
+NAME := Array
 SRC_FILES := main.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
