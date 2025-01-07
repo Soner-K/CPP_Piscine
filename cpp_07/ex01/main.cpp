@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 12:40:24 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/06 14:12:56 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:13:05 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ int main( void )
 	MyClass<int>	classInt(5);
 	MyClass<float>	classFloat(7.5f);
 
+	// print(5);
+	// print(5.7f);
+	// std::cout << std::endl;
 
-	iter(arrInt, 5, print<int>); //explicity specifying the type, because print is a template
+	//explicity specifying the type, compiler wouldn't know which instance to use otherwise
+	iter(arrInt, 5, print<int>);
 	std::cout << "\n";
 	iter(arrInt, 5, printInt);
 	std::cout << "\n";

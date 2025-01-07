@@ -6,14 +6,17 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:55:43 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/06 15:41:14 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:01:31 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
 template < typename T >
-Array<T>::Array() : _n(0) { this->_ptr = new T[0]; }
+Array<T>::Array() : _n(0) 
+{
+	this->_ptr = new T[0];
+}
 
 template < typename T >
 Array<T>::Array(unsigned int n) : _n(n)
@@ -25,7 +28,7 @@ Array<T>::Array(unsigned int n) : _n(n)
 }
 
 template < typename T >
-Array<T>::~Array() { delete this->_ptr; }
+Array<T>::~Array() { delete [] this->_ptr; }
 
 template < typename T >
 Array<T>& Array<T>::operator=(const Array& rhs)
@@ -35,10 +38,10 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 	if (this == &rhs)
 		return (*this);
 
-	delete this->_ptr;
+	delete [] this->_ptr;
 	this->_ptr = new T[rhsSize];
 	for (unsigned int i = 0; i < rhsSize; i++)
-		this->_ptr[i] = rhs[i];
+		this->_ptr[i] = rhs._ptr[i];
 
 	this->_n = rhsSize;
 
@@ -46,12 +49,21 @@ Array<T>& Array<T>::operator=(const Array& rhs)
 }
 
 template < typename T >
-Array<T>::Array(const Array& Other) { *this = Other; }
+Array<T>::Array(const Array& Other)
+{
+	unsigned int	otherSize = Other.size();
+
+	this->_ptr = new T[otherSize];
+	for (unsigned int i = 0; i < otherSize; i++)
+		this->_ptr[i] = Other[i];
+
+	this->_n = otherSize;
+}
 
 template < typename T >
 T&	Array<T>::operator[](unsigned int index)
 {
-	if ( index >= this->_n)
+	if ( index >= this->_n || index < 0)
 		throw OutOfBounds();
 	return (this->_ptr[index]);
 }
@@ -59,7 +71,7 @@ T&	Array<T>::operator[](unsigned int index)
 template < typename T >
 const T&	Array<T>::operator[](unsigned int index) const
 {
-	if ( index >= this->_n)
+	if ( index >= this->_n || index < 0)
 		throw OutOfBounds();
 	return (this->_ptr[index]);
 }
