@@ -3,6 +3,35 @@
 #include <cstdlib>
 
 #define MAX_VAL 750
+
+void	testEmptyInit(unsigned int n)
+{
+	Array<std::string>	test(n);
+
+	std::cout << test << "END.\n";	
+}
+
+void	testTwoClasses( void )
+{
+	Array<int>	me(5);
+	Array<int>	you(me);
+	Array<int>	us = me;
+
+	for (int i = 0; i < 5; i++)
+		me[i] = i;
+	for (int i = 0; i < 5; i++)
+		you[i] = i + 5;
+	for (int i = 0; i < 5; i++)
+		us[i] = i + 10;
+	std::cout << GREY << "me is " << NEUTRAL << me << '\n';
+	std::cout << GREY << "you is " << NEUTRAL << you << '\n';
+	std::cout << GREY << "us is " << NEUTRAL << us << '\n';
+
+	me = you;
+	std::cout << "me = you and printing me\n" << me << '\n';
+}
+
+
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -51,5 +80,14 @@ int main(int, char**)
         numbers[i] = rand();
     }
     delete [] mirror;//
+	std::cout
+	<< MAGENTA << "\t\t\tPERSONAL TESTS\n" << NEUTRAL
+	<< GREY << "Initializing an Array of size 10 with empty strings...\n" << NEUTRAL;
+	{
+		testEmptyInit(10);
+	}
+	{
+		testTwoClasses();
+	}
     return 0;
 }

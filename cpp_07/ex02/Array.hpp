@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:20:06 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/06 15:39:32 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/01/18 12:59:28 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 # define NEUTRAL "\033[0m"
 # define GREY "\033[1;37m"
+# define MAGENTA "\033[1;35m"
 
 #include <iostream>
 #include <exception>

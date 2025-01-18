@@ -6,17 +6,14 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 14:55:43 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/07 16:01:31 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/01/18 13:06:49 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Array.hpp"
 
 template < typename T >
-Array<T>::Array() : _n(0) 
-{
-	this->_ptr = new T[0];
-}
+Array<T>::Array() : _n(0)  { this->_ptr = new T[0]; }
 
 template < typename T >
 Array<T>::Array(unsigned int n) : _n(n)
