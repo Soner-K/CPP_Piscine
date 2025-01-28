@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:13:48 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/08 14:47:54 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:02:21 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main ( void )
 	for (int i = 0; i < SIZE; i++)
 		vct_int.push_back(rand() % MODULO);
 
-	printVector(vct_int);
+	printVector<int>(vct_int);
 	index = easyfind(vct_int, TO_FIND);
 	std::cout
 	<< (index != -1 ? GREEN : RED) << index << NEUTRAL << "\n";

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Span.tpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/08 14:13:58 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:16 by sokaraku         ###   ########.fr       */
+/*   Created: 2025/01/28 17:21:49 by sokaraku          #+#    #+#             */
+/*   Updated: 2025/01/28 17:25:43 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vector>
+#include "Span.hpp"
 
-# define NOT_FOUND -1
-
-template < typename T >
-int	easyfind(std::vector<T>& vct, int to_find)
+template <typename Iterator>
+void Span::addNumbers(Iterator begin, Iterator end)
 {
-	for (size_t i = 0; i < vct.size(); i++)
-	{
-		if (vct.at(i) == to_find)
-			return (i);
-	}
-	return NOT_FOUND;
+	for (Iterator it = begin; it != end; ++it)
+		addNumber(*it);
 }
-
