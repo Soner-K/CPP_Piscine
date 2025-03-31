@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/28 17:34:13 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:41:30 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 #include <vector>
 #include <algorithm>
 #include <exception>
+#include <set>
+#include <iostream>
+
+#include <limits.h>
+#include <time.h>
 
 # define DEFAULT_SIZE 20
 # define ERROR_MAX_CAPACITY "error: maximum capacity reached"
@@ -23,10 +28,10 @@
 class Span
 {
 private:
-			unsigned int		_capacity;
-			unsigned int		_count;
-			std::vector<int>	_vct;
-			std::vector<int>	_sorted_vct;
+			unsigned int				_capacity;
+			unsigned int				_count;
+			std::multiset<unsigned int>	_multiset;
+
 public:
 							/* Coplien form */
 								Span( void );
@@ -41,10 +46,15 @@ public:
 			void				addNumber(int number);	
 			template < typename Iterator >
 			void	addNumbers(Iterator begin, Iterator end);
+			void				fillWithModulo(unsigned int modulo);
 	
 							/*Span finding*/
 			unsigned int		shortestSpan( void ) const;
 			unsigned int		longestSpan( void ) const;
+
+							/*GETTER*/
+			unsigned int		getCount( void ) const;
+			unsigned int		getValueAt(unsigned int index) const;
 
 							/*Custom exception*/
 			class	MaxCapacityReached : public std::exception
@@ -58,6 +68,8 @@ public:
 					const virtual char*	what() const throw();
 			};
 };
+
+std::ostream&	operator<<(std::ostream& o, const Span& rhs);
 
 #include "Span.tpp"
  
