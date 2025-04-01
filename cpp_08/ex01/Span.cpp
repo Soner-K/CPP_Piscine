@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:32:30 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/03/31 15:56:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:57:57 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ unsigned int Span::getValueAt(unsigned int index) const
 	
 	return *it;
 }
-//TODO storing the values in order to facilitate span finding
-void	Span::addNumber(int number)
+
+unsigned int Span::getMaxCapacity() const { return _capacity; };
+
+void	Span::addNumber(unsigned int number)
 {
 	if (this->_count + 1 > this->_capacity)
 		throw MaxCapacityReached();
@@ -62,6 +64,8 @@ unsigned int Span::shortestSpan(void) const
 		throw SpanNotExisting();
 	for (multiset_iterator it = _multiset.begin(); it != _multiset.end(); it++)
 	{
+		if (span == 0)
+			break ;
 		if (last == -1)
 		{
 			last = *it;
@@ -88,7 +92,7 @@ void	Span::fillWithModulo(unsigned int modulo)
 	if (modulo == 0)
 		modulo = UINT_MAX;
 
-	for (unsigned int i = 0; i < _capacity; i++)
+	for (unsigned int i = 0; i < _capacity && _count < _capacity; i++)
 	{
 		_multiset.insert(rand() % modulo);
 		_count++;

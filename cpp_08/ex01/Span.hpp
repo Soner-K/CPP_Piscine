@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/03/31 15:41:30 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:58:10 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ public:
 								Span(unsigned int n);
 
 							/*Adding number*/			
-			void				addNumber(int number);	
+			void				addNumber(unsigned int number);	
 			template < typename Iterator >
-			void	addNumbers(Iterator begin, Iterator end);
+			void				addNumbers(Iterator begin, Iterator end);
 			void				fillWithModulo(unsigned int modulo);
 	
 							/*Span finding*/
@@ -54,8 +54,9 @@ public:
 
 							/*GETTER*/
 			unsigned int		getCount( void ) const;
+			unsigned int		getMaxCapacity( void ) const;
 			unsigned int		getValueAt(unsigned int index) const;
-
+							
 							/*Custom exception*/
 			class	MaxCapacityReached : public std::exception
 			{
