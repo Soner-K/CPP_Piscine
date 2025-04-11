@@ -6,39 +6,32 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:32:54 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/09 15:33:48 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/11 16:28:54 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include <deque>
 #include <list>
+#include <stack>
 
-template <typename T>
-class MutantStack
+template <typename T, typename Container = std::deque<T> >
+class MutantStack : public std::stack<T, Container>
 {
-	private:
 
-	std::list<T>		_stack;
-	
 	public:
 
 					MutantStack( void );
 					~MutantStack( void );
 					MutantStack(const MutantStack& other);
 	MutantStack&	operator=(const MutantStack& rhs);
-
-	void			pop( void );
-	void			push(const T& var);
-	bool			empty( void ) const;
-	T&				top( void );
-	size_t			size( void ) const;
-	void			swap(MutantStack& other);
-
-
 	
-	
+
+	typedef typename Container::iterator iterator;
+	iterator begin() { return this->c.begin(); }
+	iterator end() { return this->c.end(); }
 };
 
 #include "MutantStack.tpp"
