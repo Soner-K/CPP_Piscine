@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:32:54 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/11 16:28:54 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 15:43:29 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <list>
 #include <stack>
 
-template <typename T, typename Container = std::deque<T> >
+template <typename T, typename Container = std::deque<T> > //* sets up a default container if none is specified
 class MutantStack : public std::stack<T, Container>
 {
 
@@ -28,10 +28,17 @@ class MutantStack : public std::stack<T, Container>
 					MutantStack(const MutantStack& other);
 	MutantStack&	operator=(const MutantStack& rhs);
 	
+	
+	
+	//* typedef and typename are important since we're defining a type on a dependant name (depends on a template)
+	//* to avoid ambiguity, we explicitly declare it as a type using typename
+	//* the compiler could otherwise interpret it as a static member or a class
 
 	typedef typename Container::iterator iterator;
-	iterator begin() { return this->c.begin(); }
-	iterator end() { return this->c.end(); }
+	iterator begin();
+	
+
+	typename Container::iterator end();
 };
 
 #include "MutantStack.tpp"

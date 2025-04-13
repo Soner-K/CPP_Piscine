@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:45:03 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/11 16:34:09 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 14:04:01 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ int main()
 {
 	MutantStack<int>	a;
 	MutantStack<int> 	b;
-	// std::stack<std::string>	test;
 
 
 	std::cout << "Pushing 1 to stack a "<< std::endl;
-	// a.push(1);
 	a.push(1);
 	std::cout <<"stack a's top : " << a.top() << std::endl;
 	a.pop();
@@ -62,3 +60,28 @@ int main()
 	return 0;
 }
 
+
+// int main( void )
+// {
+// 	std::list<int> mlist;
+// 	mlist.push_back(5);
+// 	mlist.push_back(17);
+// 	std::cout << mlist.back() << std::endl;
+// 	mlist.pop_back();
+// 	std::cout << mlist.size() << std::endl;
+// 	mlist.push_back(3);
+// 	mlist.push_back(5);
+// 	mlist.push_back(737);
+// 	//[...]
+// 	mlist.push_back(0);
+// 	std::list<int>::iterator it = mlist.begin();
+// 	std::list<int>::iterator ite = mlist.end();
+// 	++it;
+// 	--it;
+// 	while (it != ite)
+// 	{
+// 		std::cout << *it << std::endl;
+// 		++it;
+// 	}
+// 	return 0;
+// }

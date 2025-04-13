@@ -6,22 +6,23 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:13:58 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:16 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:04:41 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <vector>
+#include <algorithm>
 
 # define NOT_FOUND -1
 
-template < typename T >
+template <typename T>
 int	easyfind(std::vector<T>& vct, int to_find)
 {
-	for (size_t i = 0; i < vct.size(); i++)
-	{
-		if (vct.at(i) == to_find)
-			return (i);
-	}
-	return NOT_FOUND;
+	typename std::vector<T>::iterator iterator =  std::find(vct.begin(), vct.end(), to_find);
+	if (iterator == vct.end())
+		return NOT_FOUND;
+	
+	int index = std::distance(vct.begin(), iterator);
+	return index;
 }
 

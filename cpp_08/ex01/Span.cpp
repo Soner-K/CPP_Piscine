@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:32:30 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/01 16:57:57 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:33:47 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@ Span::Span(const Span& Other) { *this  = Other; }
 
 Span&	Span::operator=(const Span& rhs)
 {
-	this->_capacity = rhs._capacity;
-	this->_count = rhs._capacity;
-	this->_multiset = rhs._multiset;
-
+	if (this != & rhs)
+	{
+		this->_capacity = rhs._capacity;
+		this->_count = rhs._capacity;
+		this->_multiset = rhs._multiset;
+	}
 	return *this;
 }
 
@@ -36,7 +38,7 @@ unsigned int Span::getValueAt(unsigned int index) const
 	if (index >= _capacity)
 		throw std::runtime_error("error: index is out of bound");
 		
-	std::multiset<unsigned int>::iterator it = _multiset.begin();
+	std::multiset<int>::iterator it = _multiset.begin();
 	std::advance(it, index);
 	
 	return *it;
@@ -53,29 +55,25 @@ void	Span::addNumber(unsigned int number)
 	this->_count++;
 }
 
+void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+{
+	while (begin != end && _count < _capacity)
+	{
+		addNumber(*begin);
+		begin++;
+	}
+}
+
 unsigned int Span::shortestSpan(void) const
 {
-	typedef std::multiset<unsigned int>::iterator multiset_iterator;
-
-	unsigned long	span = ULONG_MAX;
-	long			last = -1;
-
 	if (this->_count <= 1)
 		throw SpanNotExisting();
-	for (multiset_iterator it = _multiset.begin(); it != _multiset.end(); it++)
-	{
-		if (span == 0)
-			break ;
-		if (last == -1)
-		{
-			last = *it;
-			continue ;
-		}
-		if (*it - static_cast<unsigned int>(last) < span)
-			span = *it - last;
-		last = *it;
-	}
-	return span;
+
+    std::vector<int> differences(_multiset.size());
+    std::adjacent_difference(_multiset.begin(), _multiset.end(), differences.begin());
+
+	//* + 1 since adjacent_difference copies the first element in a range to the output vector (An - A(n - 1) isnt possible when n is 0)
+    return *std::min_element(differences.begin() + 1, differences.end());
 }
 
 unsigned int Span::longestSpan(void) const
@@ -90,7 +88,7 @@ void	Span::fillWithModulo(unsigned int modulo)
 	srand(time(NULL));
 
 	if (modulo == 0)
-		modulo = UINT_MAX;
+		modulo = INT_MAX;
 
 	for (unsigned int i = 0; i < _capacity && _count < _capacity; i++)
 	{

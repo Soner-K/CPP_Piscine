@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:13 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/01 16:57:28 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:36:23 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ int main(int ac, char **av)
 		cerr << e.what() << endl;
 	}
 	
-	cout << "\n\n";
+	cout << "\n\n\t\t\totherSpan \n\n";
 
 	Span	otherSpan(size);
 	Span	empty;
-	std::vector<unsigned int>	vct;
+	std::vector<int>	vct;
 
 	for (unsigned int i = 0; i < VECTOR_CAPACITY; i++)
 	{
@@ -55,7 +55,7 @@ int main(int ac, char **av)
 	}
 	try
 	{
-		otherSpan.addNumbers(vct.begin(), vct.end());
+		otherSpan.addNumber(vct.begin(), vct.end());
 		cout << otherSpan << endl;
 		cout << "shortest span : " << otherSpan.shortestSpan() << endl;
 		cout << "longest span : " << otherSpan.longestSpan() << endl;

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:36 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/01 16:58:10 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:27:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <exception>
 #include <set>
 #include <iostream>
+#include <numeric>
 
 #include <limits.h>
 #include <time.h>
@@ -30,7 +31,7 @@ class Span
 private:
 			unsigned int				_capacity;
 			unsigned int				_count;
-			std::multiset<unsigned int>	_multiset;
+			std::multiset<int>			_multiset;
 
 public:
 							/* Coplien form */
@@ -44,8 +45,7 @@ public:
 
 							/*Adding number*/			
 			void				addNumber(unsigned int number);	
-			template < typename Iterator >
-			void				addNumbers(Iterator begin, Iterator end);
+			void				addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 			void				fillWithModulo(unsigned int modulo);
 	
 							/*Span finding*/
@@ -70,7 +70,4 @@ public:
 			};
 };
 
-std::ostream&	operator<<(std::ostream& o, const Span& rhs);
-
-#include "Span.tpp"
- 
+std::ostream&	operator<<(std::ostream& o, const Span& rhs); 

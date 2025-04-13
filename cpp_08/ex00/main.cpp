@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 14:13:48 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:21 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/13 16:05:56 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <iostream>
 #include "easyfind.hpp"
 
-# define SIZE 10
-# define MODULO 8
+# define SIZE 15
+# define MODULO 10
 # define TO_FIND 5
 # define GREEN "\033[1;32m"
 # define RED "\033[1;31m"
