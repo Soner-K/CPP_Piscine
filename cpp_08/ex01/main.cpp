@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:13 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/13 16:36:23 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:45:16 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ using std::cout;
 using std::endl;
 using std::cerr;
 
-# define MODULO 500
+# define MODULO 50000
 # define VECTOR_CAPACITY 20
 
 int main(int ac, char **av)
@@ -32,7 +32,7 @@ int main(int ac, char **av)
 	try
 	{
 		mySpan.fillWithModulo(MODULO); //*fill it to max capacity
-		cout << mySpan << endl; //! to comment if capacity is too high (makes the program slower to print all values)
+		// cout << mySpan << endl; //! to comment if capacity is too high (makes the program slower to print all values)
 		cout << "shortest span : " << mySpan.shortestSpan() << endl;
 		cout << "longest span : " << mySpan.longestSpan() << endl;
 		cout << "capacity : " << mySpan.getMaxCapacity() << endl;

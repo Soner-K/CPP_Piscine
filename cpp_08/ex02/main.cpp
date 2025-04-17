@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:45:03 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/13 14:04:01 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:38:58 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ int main()
 	b.push(3);
 	std::cout << "stack b's top : " << b.top() << std::endl;
 
-
-	std::cout << "ITERATOR" << std::endl;
+	std::cout << "\n\n\n";
 
 	MutantStack<int> mstack;
 	mstack.push(5);
@@ -47,16 +46,28 @@ int main()
 	mstack.push(737);
 	//[...]
 	mstack.push(0);
+
+	std::cout << "\t\t\tITERATOR" << std::endl;
 	MutantStack<int>::iterator it = mstack.begin();
 	MutantStack<int>::iterator ite = mstack.end();
 	++it;
 	--it;
+
 	while (it != ite)
 	{
 		std::cout << *it << std::endl;
 		++it;
 	}
+	
 	std::stack<int> s(mstack);
+	std::cout << "\n\n";
+	while (s.size())
+	{
+		std::cout << s.top() << std::endl;
+		s.pop();
+	}
+
+	
 	return 0;
 }
 

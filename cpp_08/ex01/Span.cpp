@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:32:30 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/13 16:33:47 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:42:18 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ unsigned int Span::getCount() const { return _count; }
 
 unsigned int Span::getValueAt(unsigned int index) const
 {
-	if (index >= _capacity)
+	if (index >= _count)
 		throw std::runtime_error("error: index is out of bound");
 		
 	std::multiset<int>::iterator it = _multiset.begin();
