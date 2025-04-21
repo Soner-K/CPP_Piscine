@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:49:27 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/17 20:12:05 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:52:34 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,16 @@ BitcoinExchange::BitcoinExchange(const string& filepath)
 {
 	(void)filepath;
 	storeDatabaseIntoMap(DATABASE);
-	std::cout << _file;
+	// std::cout << _file;
+	handleInputFile(filepath);
 }
 
-void BitcoinExchange::storeDatabaseIntoMap(string filepath)
+void BitcoinExchange::storeDatabaseIntoMap(string database)
 {
-	std::ifstream	file(filepath.c_str());
+	std::ifstream	file(database.c_str());
 
 	if (file.is_open() == false)
-		throw BitcoinException("failed to open database at " + filepath);
+		throw BitcoinException("failed to open database at " + database);
 	
 	string line;
 	unsigned int current_line_nb = 1;
@@ -63,23 +64,26 @@ void	BitcoinExchange::storeOneLine(string line, unsigned int current_line_nb)
 		if (current_line_nb == 1)
 			return ;
 		else
-			throw BitcoinException("unexpected content in " + line + ":" + itostr(current_line_nb));
+			throw BitcoinException("unexpected content in \'" + line + "\' at line " + itostr(current_line_nb));
 	}
 
 	size_t		index = line.find(',');
 	if (index == string::npos)
-		throw BitcoinException("bad format in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("bad format in \'" + line + "\' at line " + itostr(current_line_nb));
 	string	date = line.substr(0, index);
 
 	if (line.size() <= index)
-		throw BitcoinException("bitcoin's value missing in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("bitcoin's value missing in \'" + line + "\' at line " + itostr(current_line_nb));
+	checkDateValidity(date, current_line_nb);
+		
 	float	value = strtof(&line[index + 1], NULL);
-	this->_file[date] = value;
+	date.erase(std::remove(date.begin(), date.end(), '-'), date.end());
+	this->_file[atol(date.c_str())] = value;
 }
 
 void	BitcoinExchange::handleInputFile(string filepath)
 {
-	std::ifstream	input(filepath);
+	std::ifstream	input(filepath.c_str());
 
 	if (input.is_open() == false)
 		throw BitcoinException("failed to open input file at " + filepath);
@@ -88,31 +92,84 @@ void	BitcoinExchange::handleInputFile(string filepath)
 	unsigned int current_line_nb = 1;
 	while (std::getline(input, line))
 	{
-		handleOneLine(line, current_line_nb);
+		if (input.fail() || input.bad())
+			throw (strerror(errno));
+		
+		try { handleOneLine(line, current_line_nb); }
+		catch (BitcoinException& btcException)
+		{
+			std::cerr << "error: " << btcException.what() << std::endl;
+		}
 		current_line_nb++;
 	}
 }
 
 void	BitcoinExchange::handleOneLine(string line, unsigned int current_line_nb)
 {
-	std::istringstream	iss(line);
-	string date, separator;
+	std::istringstream	iss(line.c_str());
+	string date, separator, tmp;
 	double	value;
+	long	l_date;
 
 	iss >> date;
 	iss >> separator;
 	if (separator != "|")
-		throw BitcoinException("bad input in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("bad separator in \'" + line + "\' at line " + itostr(current_line_nb));
+	if (current_line_nb == 1)
+		return ;
 	iss >> value;
 	if (iss.fail() == true)
-		throw BitcoinException("failed conversion in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("failed conversion in \'" + line + "\' at line " + itostr(current_line_nb));
 	if (value < 0)
-		throw BitcoinException("negative number in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("negative number in \'" + line + "\' at line " + itostr(current_line_nb));
 	else if (value > 1000)
-		throw BitcoinException("too big a number in " + line + ":" + itostr(current_line_nb));
+		throw BitcoinException("too big a number in \'" + line + "\' at line " + itostr(current_line_nb) + " (max is 1000)");
+	// std::cout << date << separator << value << std::endl;
+	checkDateValidity(date, current_line_nb);
+	tmp = date;
+	std::replace(tmp.begin(), tmp.end(), '-', '0');
+	l_date = atol(tmp.c_str());
+	findValueAt(date, static_cast<float>(value), current_line_nb);
 	
 }
 
+void	BitcoinExchange::checkDateValidity(string& date, unsigned int current_line_nb)
+{
+	long year = getValueFromDate(date, YEAR, current_line_nb);
+	long month = getValueFromDate(date, MONTH, current_line_nb);
+	long day = getValueFromDate(date, DAY, current_line_nb);
+
+	if (year < 2009 || year > 2022)
+		throw BitcoinException("bad year in \'" + date + "\' at line " + itostr(current_line_nb) + " (accepted years : 2009-2022)");
+	if (month < 1 || month > 12)
+		throw BitcoinException("bad month in \'" + date + "\' at line " + itostr(current_line_nb));
+	if (day < 1 || day > 31)
+		throw BitcoinException("bad day in \'" + date + "\' at line " + itostr(current_line_nb));
+
+	int8_t	days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (year % 4 == 0)
+		days_in_month[1] = 29;
+	if (day > days_in_month[month - 1])
+		throw BitcoinException("bad days to year-month in \'" + date + "\' at line " + itostr(current_line_nb) + " (should have " + itostr(days_in_month[month - 1]) + ")");
+}
+
+void	BitcoinExchange::findValueAt(string& date, float nb, unsigned int current_line_nb)
+{
+	string tmp(date);
+	tmp.erase(std::remove(tmp.begin(), tmp.end(), '-'), tmp.end());
+	long	l_date = atol(tmp.c_str());
+	
+	map<long, float>::iterator it = _file.lower_bound(l_date);
+	if (it == _file.end())
+		it--;
+	else if (it->first > l_date)
+	{
+		if (it == _file.begin())
+			throw BitcoinException("no entry for \'" + date + "\' at line " + itostr(current_line_nb));
+		it--;
+	}
+	std::cout << date << " => " << nb << " = " << (it->second * nb) << std::endl;
+}
 
 std::ostream& operator<<(std::ostream& os, const std::map<std::string, float>& map)
 {
