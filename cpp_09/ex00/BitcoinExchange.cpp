@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:49:27 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/21 19:52:34 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/22 17:56:13 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ BitcoinExchange& BitcoinExchange::operator==(const BitcoinExchange& rhs)
 	return *this;
 }
 
-BitcoinExchange::BitcoinExchange(const string& filepath)
+BitcoinExchange::BitcoinExchange(const string filepath)
 {
-	(void)filepath;
 	storeDatabaseIntoMap(DATABASE);
-	// std::cout << _file;
 	handleInputFile(filepath);
 }
 
@@ -52,12 +50,12 @@ void BitcoinExchange::storeDatabaseIntoMap(string database)
 	unsigned int current_line_nb = 1;
 	while (std::getline(file, line))
 	{
-		storeOneLine(line, current_line_nb);
+		parseOneLine(line, current_line_nb);
 		current_line_nb++;
 	}
 }
 
-void	BitcoinExchange::storeOneLine(string line, unsigned int current_line_nb)
+void	BitcoinExchange::parseOneLine(string line, unsigned int current_line_nb)
 {
 	if (line.find_first_of("0123456789") == string::npos)
 	{
@@ -70,14 +68,50 @@ void	BitcoinExchange::storeOneLine(string line, unsigned int current_line_nb)
 	size_t		index = line.find(',');
 	if (index == string::npos)
 		throw BitcoinException("bad format in \'" + line + "\' at line " + itostr(current_line_nb));
-	string	date = line.substr(0, index);
 
-	if (line.size() <= index)
-		throw BitcoinException("bitcoin's value missing in \'" + line + "\' at line " + itostr(current_line_nb));
+	string	date = line.substr(0, index);
+	string bitcoin_value = line.substr(index + 1);	
 	checkDateValidity(date, current_line_nb);
-		
+	checkBitcoinValidity(bitcoin_value, current_line_nb);	
+
+	storeLine(line, date);
+}
+
+void	BitcoinExchange::checkDateValidity(string& date, unsigned int current_line_nb)
+{
+	long year = getValueFromDate(date, YEAR, current_line_nb);
+	long month = getValueFromDate(date, MONTH, current_line_nb);
+	long day = getValueFromDate(date, DAY, current_line_nb);
+
+	if (year < 2009 || year > 2022)
+		throw BitcoinException("bad year in \'" + date + "\' at line " + itostr(current_line_nb) + " (accepted years : 2009-2022)");
+	if (month < 1 || month > 12)
+		throw BitcoinException("bad month in \'" + date + "\' at line " + itostr(current_line_nb));
+	if (day < 1 || day > 31)
+		throw BitcoinException("bad day in \'" + date + "\' at line " + itostr(current_line_nb));
+
+	int8_t	days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (year % 4 == 0)
+		days_in_month[1] = 29;
+	if (day > days_in_month[month - 1])
+		throw BitcoinException("bad days to year-month in \'" + date + "\' at line " + itostr(current_line_nb) + " (should have " + itostr(days_in_month[month - 1]) + ")");
+}
+
+void	BitcoinExchange::checkBitcoinValidity(string& bitcoin, unsigned int current_line_nb)
+{
+	if (bitcoin.empty() == true || (bitcoin.size() == 1 && isdigit(bitcoin.at(0)) == false))
+		throw BitcoinException("bitcoin's value missing at line " + itostr(current_line_nb));
+
+	if (bitcoin.find_first_not_of("0123456789.") != string::npos || std::count(bitcoin.begin(), bitcoin.end(), '.') > 1)
+		throw BitcoinException("wrong bitcoin's format in \'" + bitcoin + "\' at line " + itostr(current_line_nb));
+}
+
+void	BitcoinExchange::storeLine(string& line, string& date)
+{
+	size_t	index = line.find(',');
 	float	value = strtof(&line[index + 1], NULL);
 	date.erase(std::remove(date.begin(), date.end(), '-'), date.end());
+
 	this->_file[atol(date.c_str())] = value;
 }
 
@@ -124,33 +158,12 @@ void	BitcoinExchange::handleOneLine(string line, unsigned int current_line_nb)
 		throw BitcoinException("negative number in \'" + line + "\' at line " + itostr(current_line_nb));
 	else if (value > 1000)
 		throw BitcoinException("too big a number in \'" + line + "\' at line " + itostr(current_line_nb) + " (max is 1000)");
-	// std::cout << date << separator << value << std::endl;
 	checkDateValidity(date, current_line_nb);
 	tmp = date;
-	std::replace(tmp.begin(), tmp.end(), '-', '0');
+	tmp.erase(std::remove(tmp.begin(), tmp.end(), '-'), tmp.end());
 	l_date = atol(tmp.c_str());
 	findValueAt(date, static_cast<float>(value), current_line_nb);
 	
-}
-
-void	BitcoinExchange::checkDateValidity(string& date, unsigned int current_line_nb)
-{
-	long year = getValueFromDate(date, YEAR, current_line_nb);
-	long month = getValueFromDate(date, MONTH, current_line_nb);
-	long day = getValueFromDate(date, DAY, current_line_nb);
-
-	if (year < 2009 || year > 2022)
-		throw BitcoinException("bad year in \'" + date + "\' at line " + itostr(current_line_nb) + " (accepted years : 2009-2022)");
-	if (month < 1 || month > 12)
-		throw BitcoinException("bad month in \'" + date + "\' at line " + itostr(current_line_nb));
-	if (day < 1 || day > 31)
-		throw BitcoinException("bad day in \'" + date + "\' at line " + itostr(current_line_nb));
-
-	int8_t	days_in_month[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	if (year % 4 == 0)
-		days_in_month[1] = 29;
-	if (day > days_in_month[month - 1])
-		throw BitcoinException("bad days to year-month in \'" + date + "\' at line " + itostr(current_line_nb) + " (should have " + itostr(days_in_month[month - 1]) + ")");
 }
 
 void	BitcoinExchange::findValueAt(string& date, float nb, unsigned int current_line_nb)

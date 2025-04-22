@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:29:04 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/21 19:57:51 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/22 18:04:28 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int main(int ac, char **av)
 		catch (BitcoinException& btcException)
 		{
 			std::cerr << "error: " << btcException.what() << std::endl;
+			return EXIT_FAILURE;
+		}
+		catch (std::exception& e)
+		{
+			std::cerr << "other error: " << e.what() << std::endl;
+			return EXIT_FAILURE;
 		}
 		return EXIT_SUCCESS;
 	}

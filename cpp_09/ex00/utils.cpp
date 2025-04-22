@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/21 19:44:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/22 16:03:59 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ long	getValueFromDate(string& s, char format, unsigned int current_line_nb)
 	{
 		last = s.find("-");
 		if (last == string::npos)
-			throw (BitcoinException("bad date format (year) in \'" + s + "\' at line " + itostr(current_line_nb)));
+			throw (BitcoinException("bad date format in \'" + s + "\' at line " + itostr(current_line_nb)));
 		str = s.substr(begin, last).c_str();
 		return (atol(str));
 	}
@@ -49,7 +49,7 @@ long	getValueFromDate(string& s, char format, unsigned int current_line_nb)
 		begin = s.find("-");
 		last = s.find_last_of("-");
 		if (begin == string::npos)
-			throw (BitcoinException("bad date format (month) in \'" + s + "\' at line " + itostr(current_line_nb)));
+			throw (BitcoinException("bad date format in \'" + s + "\' at line " + itostr(current_line_nb)));
 		str = s.substr(begin + 1, last).c_str();
 		return (atol(str));
 	}
@@ -58,7 +58,7 @@ long	getValueFromDate(string& s, char format, unsigned int current_line_nb)
 
 		begin = s.find_last_of("-");
 		if (begin == string::npos)
-			throw (BitcoinException("bad date format (day) in \'" + s + "\' at line " + itostr(current_line_nb)));
+			throw (BitcoinException("bad date format  in \'" + s + "\' at line " + itostr(current_line_nb)));
 		str = s.substr(begin + 1).c_str();
 		return (atol(str));
 	}
