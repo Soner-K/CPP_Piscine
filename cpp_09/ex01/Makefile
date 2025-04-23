@@ -1,5 +1,5 @@
 NAME := RPN
-SRC_FILES := main.cpp RPN.cpp
+SRC_FILES := main.cpp RPN.cpp utils.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)

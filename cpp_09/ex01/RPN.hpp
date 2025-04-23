@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:46:11 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/22 19:12:28 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/24 17:29:10 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,14 @@
 
 #include <string>
 #include <stack>
+#include <list>
 
 #include <algorithm>
 #include <sstream>
+
+#include <string.h>
+#include <errno.h>
+#include <stdint.h>
 
 using std::stack;
 using std::string;
@@ -31,17 +36,19 @@ enum Type
 
 typedef struct Token
 {
-	string	data;
+	char	operation;
+	int		number;
 	Type	type;
+
+	Token(char operation, int number, Type type);
+	Token( void );
 } Token;
-
-
 
 class rpnCalculator
 {
 
 private:
-			stack<Token>	_operationStack;
+			stack<Token, std::list<Token> >	_operationStack;
 
 			void			parseInput(string& input);
 			
@@ -52,4 +59,16 @@ public:
 	rpnCalculator&			operator=(const rpnCalculator& rhs);
 	
 							rpnCalculator(string input);
+	size_t 					countTokens(string& input, int8_t mode);
+
+	void					calculate(string& input);
+	void					prepareTokens(Token& operation, Token& rvalue, Token& lvalue);
+
+	void					doOperation(Token lvalue, Token rvalue, Token operation);
 };
+
+						/*UTILS*/
+bool 	isOperator(string& token);
+bool 	isNumber(string& token);
+string	itostr(int n);
+void	checkForOverflow(string number);

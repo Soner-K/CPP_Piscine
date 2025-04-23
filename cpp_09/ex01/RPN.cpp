@@ -34,43 +34,10 @@ rpnCalculator& rpnCalculator::operator=(const rpnCalculator& rhs)
 rpnCalculator::rpnCalculator(string input)
 {
 	parseInput(input);
-	std::cout << "OK" << std::endl;
+	calculate(input);
 }
 
-static bool isOperator(string& token)
-{
-	bool	isAnOperator = ((token[0] == '-') || (token[0] == '+') || (token[0] == '/') || (token[0] == '*'));
-
-	if (isAnOperator == true && token.size() > 1 && isdigit(token[1]) == false)
-		throw std::runtime_error("\'" + token + "\' : each token must be separated by a space)");
-
-	return isAnOperator && (token.size() == 1);
-}
-
-static bool isNumber(string& token)
-{
-	bool	start_with_sign = ((token[0] == '-') || (token[0] == '+') || (token[0] == '/') || (token[0] == '*'));
-
-	if (start_with_sign == true)
-	{
-		if (token.size() == 1)
-			return false;
-		if (token[0] == '*' || token[0] == '/')
-			throw std::runtime_error("\'" + token + "\' is not accepted");
-	}
-
-	if (isdigit(token.at(0)) || start_with_sign == true)
-	{
-		if (token.find_first_of('-', 1) != string::npos
-			|| token.find_first_of('+', 1) != string::npos
-			|| token.find_first_of('/', 1) != string::npos
-			|| token.find_first_of('*', 1) != string::npos)
-			throw std::runtime_error("\'" + token + "\' is not accepted");
-	}
-	return (true);
-}
-
-static size_t countTokens(string& input, int8_t mode)
+size_t rpnCalculator::countTokens(string& input, int8_t mode)
 {
 	std::istringstream	iss(input);
 	string				token;
@@ -104,8 +71,82 @@ void	rpnCalculator::parseInput(string& input)
 	size_t	operators = countTokens(input, OPERATOR);
 	size_t	numbers = countTokens(input, NUMBER);
 
-	std::cout << "operators : " << operators << std::endl;
-	std::cout << "numbers : " << numbers << std::endl;
 	if (operators != (numbers - 1))
 		throw std::runtime_error("wrong operators/numbers ratio");
+}
+
+void	rpnCalculator::calculate(string& input)
+{
+	std::istringstream	iss(input);
+	string				token;
+
+	while (iss >> token)
+	{
+		if (iss.fail() == true || iss.bad() == true)
+			throw std::runtime_error("failed extraction of token : " + string(strerror(errno)));
+		if (isNumber(token))
+		{
+			checkForOverflow(token);
+			Token	toPush(0, atoi(token.c_str()), NUMBER);
+			_operationStack.push(toPush);
+		}
+		else
+		{
+			Token	toPush(token[0], 0, OPERATOR); //* not an issue that the number is set to 0
+			_operationStack.push(toPush);
+
+			if (_operationStack.size() < 3)
+				throw std::runtime_error("not enough numbers to do the operation");
+
+			Token operation, rvalue, lvalue;
+			prepareTokens(operation, rvalue, lvalue);
+			doOperation(lvalue, rvalue, operation);
+		}	
+	}
+	std::cout << _operationStack.top().number << std::endl;
+}
+
+void	rpnCalculator::prepareTokens(Token& operation, Token& rvalue, Token& lvalue)
+{
+	operation = _operationStack.top();
+	_operationStack.pop();
+
+	rvalue = _operationStack.top();
+	_operationStack.pop();
+
+	lvalue = _operationStack.top();
+	_operationStack.pop();
+}
+
+void	rpnCalculator::doOperation(Token lvalue, Token rvalue, Token operation)
+{
+	if (lvalue.type != NUMBER || rvalue.type != NUMBER)
+		throw std::runtime_error("shouldn't happen but here we are : operands need to be numbers");
+	
+	long	value = 0;
+	switch (operation.operation)
+	{
+		case '+':
+			value = static_cast<long>(lvalue.number) + static_cast<long>(rvalue.number);
+			break ;
+		case '-':
+			value = static_cast<long>(lvalue.number) - static_cast<long>(rvalue.number);
+			break ;
+		case '/':
+			value = static_cast<long>(lvalue.number) / static_cast<long>(rvalue.number);
+			break ;
+		case '*':
+			value = static_cast<long>(lvalue.number) * static_cast<long>(rvalue.number);
+			break ;
+		default:
+			break;
+	}
+
+	if (value > INT32_MAX)
+		throw std::runtime_error("overflow in operation \'" + itostr(lvalue.number) + " " + itostr(rvalue.number) + " " + operation.operation + "\'");
+	if (value < INT32_MIN)
+		throw std::runtime_error("underflow in operation \'" + itostr(lvalue.number) + " " + itostr(rvalue.number) + " " + operation.operation + "\'");
+	
+	Token	toPush(0, static_cast<int>(value), NUMBER);
+	_operationStack.push(toPush);
 }
