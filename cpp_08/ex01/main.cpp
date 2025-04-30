@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:24:13 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/17 15:45:16 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:37:35 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(int ac, char **av)
 		cerr << e.what() << endl;
 	}
 	
-	cout << "\n\n\t\t\totherSpan \n\n";
+	cout << "\n\n\t\t\totherSpan \n";
 
 	Span	otherSpan(size);
 	Span	empty;

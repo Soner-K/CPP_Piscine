@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 15:32:30 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/17 15:42:18 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/03 15:50:11 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ Span&	Span::operator=(const Span& rhs)
 	if (this != & rhs)
 	{
 		this->_capacity = rhs._capacity;
-		this->_count = rhs._capacity;
+		this->_count = rhs._count;
 		this->_multiset = rhs._multiset;
 	}
 	return *this;
@@ -48,7 +48,7 @@ unsigned int Span::getMaxCapacity() const { return _capacity; };
 
 void	Span::addNumber(unsigned int number)
 {
-	if (this->_count + 1 > this->_capacity)
+	if (this->_count == this->_capacity)
 		throw MaxCapacityReached();
 
 	this->_multiset.insert(number);
@@ -57,11 +57,11 @@ void	Span::addNumber(unsigned int number)
 
 void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	while (begin != end && _count < _capacity)
-	{
-		addNumber(*begin);
-		begin++;
-	}
+	if (static_cast<unsigned long>(this->_count) + std::distance(begin, end) > this->_capacity)
+		throw MaxCapacityReached();
+
+	_multiset.insert(begin, end);
+	this->_count += std::distance(begin, end);
 }
 
 unsigned int Span::shortestSpan(void) const

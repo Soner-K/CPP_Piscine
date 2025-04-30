@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 16:32:54 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/13 15:43:29 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:49:53 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ class MutantStack : public std::stack<T, Container>
 	
 	
 	
-	//* typedef and typename are important since we're defining a type on a dependant name (depends on a template)
+	//* typedef AND typename are important since we're defining a type on a dependant name (depends on a template)
 	//* to avoid ambiguity, we explicitly declare it as a type using typename
 	//* the compiler could otherwise interpret it as a static member or a class
 
 	typedef typename Container::iterator iterator;
 	iterator begin();
 	
-
+	//* other way to declare it (still using typename since its a dependant name)
 	typename Container::iterator end();
 };
 

@@ -6,14 +6,17 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 17:45:17 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/13 16:41:37 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/04/30 11:55:54 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
 
 //* redeclaration of template is needed since MutantStack is a template class
-//* allows to tell that T and Container are template parameters
+//* and therefore its member functions are also templates.
+//* the template parameters are known only within the scope of the class definition
+//* by writing template<..> it allows to tell that the function
+//* is from a template class and that T and Container are template parameters
 
 template <typename T, typename Container> //* template header
 MutantStack<T, Container>::MutantStack() : std::stack<T, Container>()
