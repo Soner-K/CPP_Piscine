@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:46:11 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/24 17:29:10 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/16 12:48:23 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 #include <string>
 #include <stack>
-#include <list>
 
 #include <algorithm>
 #include <sstream>
+#include <list>
 
 #include <string.h>
 #include <errno.h>
