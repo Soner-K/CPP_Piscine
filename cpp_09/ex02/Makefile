@@ -1,5 +1,5 @@
 NAME := PmergeMe
-SRC_FILES := main.cpp PmergeMe.cpp utils.cpp parsing.cpp pairs.cpp
+SRC_FILES := main.cpp PmergeMe.cpp utils.cpp parsing.cpp mergeInsertion.cpp
 OBJ_DIR := obj
 OBJ_FILES := $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC_FILES))
 DEPS := $(OBJ_FILES:$(OBJ_DIR)/%.o=$(OBJ_DIR)/%.d)

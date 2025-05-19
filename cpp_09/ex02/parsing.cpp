@@ -6,12 +6,23 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:09:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/16 14:37:17 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:35:58 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+/**
+ * @brief Parses and validates the command-line input for the Ford-Johnson algorithm.
+ *
+ * This function combines the command-line arguments into a single input string,
+ * checks for format errors, and stores the validated integers in the class's internal containers.
+ * It throws exceptions if the input is empty, contains forbidden characters, duplicates, or overflows.
+ *
+ * @param ac The number of command-line arguments.
+ * @param elements The array of command-line argument strings.
+ * @throws std::runtime_error if the input is invalid, contains duplicates, or overflows.
+ */
 void	PmergeMe::parse(int ac, char** elements)
 {
 	string input = getInput(ac, elements);

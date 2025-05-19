@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/22 16:03:59 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:23:45 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ string itostr(unsigned int n)
 	return oss.str();
 }
 
+/**
+ * @brief Extracts a numeric value (year, month, or day) from a date string.
+ *
+ * The function parses the input string `s` according to the specified `format` (YEAR, MONTH, or DAY)
+ * and returns the corresponding value as a long integer. If the date format is invalid,
+ * a BitcoinException is thrown with an error message indicating the line number.
+ *
+ * @param s The date string in the format "YYYY-MM-DD".
+ * @param format The part of the date to extract: YEAR, MONTH, or DAY.
+ * @param current_line_nb The current line number (used for error reporting).
+ * @return The extracted value as a long integer, or -1 if the format is not recognized.
+ * @throws BitcoinException if the date format is invalid.
+ */
 long	getValueFromDate(string& s, char format, unsigned int current_line_nb)
 {
 	size_t	begin = 0, last = 0;

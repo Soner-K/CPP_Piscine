@@ -59,6 +59,15 @@ size_t rpnCalculator::countTokens(string& input, int8_t mode)
 	return (n);
 }
 
+/**
+ * @brief Parses and validates the input string for the RPN calculator.
+ *
+ * Checks for empty input, forbidden tokens, and validates the ratio of operators to numbers.
+ * Throws an exception if the input is invalid.
+ *
+ * @param input The input string to parse and validate.
+ * @throws std::runtime_error if the input is empty, contains forbidden tokens, or has an invalid operator/number ratio.
+ */
 void	rpnCalculator::parseInput(string& input)
 {
 	if (input.empty() == true)
@@ -106,6 +115,14 @@ void	rpnCalculator::calculate(string& input)
 	std::cout << _operationStack.top().number << std::endl;
 }
 
+/**
+ * @brief Extracts the top three tokens from the operation stack for an operation.
+ *
+ * 
+ * @param operation Reference to store the operator token.
+ * @param rvalue Reference to store the right operand token.
+ * @param lvalue Reference to store the left operand token.
+ */
 void	rpnCalculator::prepareTokens(Token& operation, Token& rvalue, Token& lvalue)
 {
 	operation = _operationStack.top();
@@ -118,6 +135,18 @@ void	rpnCalculator::prepareTokens(Token& operation, Token& rvalue, Token& lvalue
 	_operationStack.pop();
 }
 
+
+/**
+ * @brief Performs the arithmetic operation on two operand tokens.
+ *
+ * Executes the operation specified by the operator token on the two operand tokens.
+ * Checks for overflow and underflow, and pushes the result back onto the operation stack.
+ *
+ * @param lvalue The left operand token.
+ * @param rvalue The right operand token.
+ * @param operation The operator token.
+ * @throws std::runtime_error if operands are not numbers or if overflow/underflow occurs.
+ */
 void	rpnCalculator::doOperation(Token lvalue, Token rvalue, Token operation)
 {
 	if (lvalue.type != NUMBER || rvalue.type != NUMBER)

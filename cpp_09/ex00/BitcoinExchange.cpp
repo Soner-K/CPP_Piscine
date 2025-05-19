@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:49:27 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/22 17:56:13 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:28:00 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,17 @@ void BitcoinExchange::storeDatabaseIntoMap(string database)
 	}
 }
 
+/**
+ * @brief Parses a single line from the CSV database and validates its content.
+ *
+ * This function checks if the line contains numeric data, extracts the date and bitcoin value,
+ * validates both, and stores the parsed line in the internal map. If the line is the header (first line),
+ * it is skipped. Throws a BitcoinException if the format or content is invalid.
+ *
+ * @param line The line from the CSV file to parse.
+ * @param current_line_nb The current line number in the file (for error reporting).
+ * @throws BitcoinException if the line format or content is invalid.
+ */
 void	BitcoinExchange::parseOneLine(string line, unsigned int current_line_nb)
 {
 	if (line.find_first_of("0123456789") == string::npos)
@@ -106,6 +117,15 @@ void	BitcoinExchange::checkBitcoinValidity(string& bitcoin, unsigned int current
 		throw BitcoinException("wrong bitcoin's format in \'" + bitcoin + "\' at line " + itostr(current_line_nb));
 }
 
+/**
+ * @brief Stores a parsed line's date and bitcoin value into the internal map.
+ *
+ * This function extracts the bitcoin value from the line, removes dashes from the date,
+ * and stores the value in the internal map using the numeric date as the key.
+ *
+ * @param line The line containing the date and value.
+ * @param date The date string (will be modified to remove dashes).
+ */
 void	BitcoinExchange::storeLine(string& line, string& date)
 {
 	size_t	index = line.find(',');
@@ -138,6 +158,18 @@ void	BitcoinExchange::handleInputFile(string filepath)
 	}
 }
 
+/**
+ * @brief Parses and validates a single line from the input file.
+ *
+ * This function extracts the date, separator, and value from the input line,
+ * checks for correct formatting and value ranges, and then looks up and prints
+ * the corresponding bitcoin value from the internal map. Throws a BitcoinException
+ * if the line format or content is invalid.
+ *
+ * @param line The line from the input file to parse.
+ * @param current_line_nb The current line number in the file (for error reporting).
+ * @throws BitcoinException if the line format or content is invalid.
+ */
 void	BitcoinExchange::handleOneLine(string line, unsigned int current_line_nb)
 {
 	std::istringstream	iss(line.c_str());

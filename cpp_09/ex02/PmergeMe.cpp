@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:58:25 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/16 15:00:08 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:35:21 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,39 +41,43 @@ PmergeMe::PmergeMe(int ac, char** elements)
 
 	parse(ac, elements);
 	std::cout << *this;
-	deque<t_pairInts > d_pairs = makeDequePairs(_dq_data);
-	vector<t_pairInts > v_pairs = makeVectorPairs(_vct_data);
+
+	prepareJacobsthalSequence();
+	deque<t_pairInts > d_pairs = makePairs< deque<t_pairInts> >(_dq_data);
+	vector<t_pairInts > v_pairs = makePairs<vector<t_pairInts> >(_vct_data);
 
 	sortPairs(d_pairs.begin(), d_pairs.end());
 	sortPairs(v_pairs.begin(), v_pairs.end());
 
-	std::cout << "\n\n\n\t\t DEQUE\n\n";
+	std::cout << "\n\n\n\t\t DEQUE \n\n";
 	for (deque<t_pairInts>::iterator it = d_pairs.begin(); it != d_pairs.end(); ++it)
 		std::cout << "(" << it->first << ", " << it->second << ") ";
 	std::cout << std::endl;
 
-	std::cout << "\n\n\n\t\t VECTOR\n\n";
+	std::cout << "\n\n\n\t\t VECTOR \n\n";
 	for (vector<t_pairInts>::iterator it = v_pairs.begin(); it != v_pairs.end(); ++it)
 		std::cout << "(" << it->first << ", " << it->second << ") ";
 	std::cout << std::endl;
 
-	
-	vector<int>	v_main = getMain< vector<int> >(v_pairs);
-	vector<int>	v_pend = getPend< vector<int> >(v_pairs);
+	vector<int>	v_main = getMainOrPend< vector<int> >(v_pairs, MAIN);
+	vector<int>	v_pend = getMainOrPend< vector<int> >(v_pairs, PEND);
 
-	deque<int>	d_main = getMain< deque<int> >(d_pairs);
-	deque<int>	d_pend = getPend< deque<int> >(d_pairs);
+	deque<int>	d_main = getMainOrPend< deque<int> >(d_pairs, MAIN);
+	deque<int>	d_pend = getMainOrPend< deque<int> >(d_pairs, PEND);
 
-	std::cout << "\n\n\n\t\t VECTOR MAIN\n\n";
+	std::cout << "\n\n\n\t\t VECTOR MAIN 2\n\n";
 	print(v_main.begin(), v_main.end());
-	std::cout << "\n\n\n\t\t VECTOR PEND\n\n";
+	std::cout << "\n\n\n\t\t VECTOR PEND 2\n\n";
 	print(v_pend.begin(), v_pend.end());
 	
-	std::cout << "\n\n\n\t\t DEQUE MAIN\n\n";
-	print(d_main.begin(), d_main.end());
-	std::cout << "\n\n\n\t\t DEQUE PEND\n\n";
-	print(d_pend.begin(), d_pend.end());
-	std::cout << std::endl;
+	// std::cout << "\n\n\n\t\t DEQUE MAIN 2\n\n";
+	// print(d_main.begin(), d_main.end());
+	// std::cout << "\n\n\n\t\t DEQUE PEND 2\n\n";
+	// print(d_pend.begin(), d_pend.end());
+	// std::cout << std::endl;
+
+	insertPendIntoMain(v_main, v_pend, v_pairs);
+
 }
 
 
@@ -93,4 +97,7 @@ std::ostream&	operator<<(std::ostream& o, const PmergeMe& rhs)
 	}
 	return o;
 }
+
+
+
 
