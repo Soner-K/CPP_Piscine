@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:08:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 15:01:07 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:21:03 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,65 @@ static int	findRightBoundFromPairs(int to_find, ContainerPair& pairs, Container 
 	for(; it != end; it++)
 	{
 		if (to_find == it->first)
-		{
-			// std::cout << to_find << " is associated with " << it->second << std::endl;
 			break ;
-		}
 	}
 	return std::find(main.begin(), main.end(), it->second) - main.begin();
 }	
 
-// static void priorityInsertion()
-// {
-	
-// }
-
-int	findIndexOfInsertion(vector<int>& main, int to_insert, int right_bound)
+template<typename Container>
+static int	findIndexOfInsertion(Container& main, int to_insert, int right_bound)
 {
 	int left_bound = 0;
 	int middle;
 
 	while (left_bound <= right_bound)
 	{
-		middle = left_bound + (right_bound / 2);
+		middle = left_bound + (right_bound - left_bound) / 2;
 		if (to_insert > main[middle])
-			right_bound = middle;
-		else if (to_insert < main[middle])
-			left_bound = middle;
-		if (to_insert < main[middle] && to_insert > main[middle - 1])
-			return middle;
+			left_bound = middle + 1;
+		else
+			right_bound = middle - 1;
 	}
 	return left_bound;
+}
+
+template <typename Container>
+static void setPriorityInsertion(int (&priority_insertion)[31], Container& pend, const vector<int> jacobsthal)
+{
+	size_t	size = pend.size();
+
+	for (__int8_t i = 1; jacobsthal[i] < static_cast<int>(size) && i != 31; i++)
+	{
+		if (i >= static_cast<__int8_t>(size))
+			break ;
+		priority_insertion[i] = pend[i];
+	}
+	
+}
+
+template<typename Container, typename ContainerPair>
+void	PmergeMe::insertPendIntoMain(Container& main, Container& pend, ContainerPair& pairs)
+{
+	int data, right_bound, index, i;
+	int	priority_insertion[31];
+
+	std::fill_n(&priority_insertion[0], 31, -1);
+	setPriorityInsertion(priority_insertion, pend, _jacobsthal_sequence);
+	i = 0;
+	while (pend.size())
+	{
+		if (i > 0 && i < 31 && priority_insertion[i] != -1)
+			data = priority_insertion[i];
+		else
+			data = pend.front();
+		i++;
+
+		right_bound = findRightBoundFromPairs(data, pairs, main);
+		index = findIndexOfInsertion(main, data, right_bound);
+
+		main.insert(main.begin() + index, data);
+		pend.erase(std::find(pend.begin(), pend.end(), data));
+	}
 }
 
 void	PmergeMe::mergeInsertionSort(vector<int>& vct)
@@ -67,24 +97,27 @@ void	PmergeMe::mergeInsertionSort(vector<int>& vct)
 	vector<int> pend = getMainOrPend<vector<int> >(pairs, PEND);
 
 	mergeInsertionSort(main);
-	//insertion phase;
-
+	
+	insertPendIntoMain(main, pend, pairs);
 	vct = main;
 	return ;
 }
 
-void	PmergeMe::insertPendIntoMain(vector<int>& main, vector<int>& pend, vector<pair<int,int> >& pairs)
+void	PmergeMe::mergeInsertionSort(deque<int>& dq)
 {
-	(void)pend;
-	srand(time(NULL));
-	int index = rand() % pend.size();
-	std::sort(main.begin(), main.end());
-	std::cout << "\nsorted main for testing purposes " << std::endl;
-	print(main.begin(), main.end());
-	int right_bound = findRightBoundFromPairs(pend[index], pairs, main);
-	std::cout << "right bound of " << pend[index] << " is " << right_bound << std::endl;
+	typedef pair<int, int> t_pairInts;
 
+	if (dq.size() <= 1)
+		return ;
+	vector<t_pairInts> pairs = makePairs<vector<t_pairInts> >(dq);
+	sortPairs(pairs.begin(), pairs.end());
+	
+	deque<int> main = getMainOrPend<deque<int> >(pairs, MAIN);
+	deque<int> pend = getMainOrPend<deque<int> >(pairs, PEND);
 
-	// std::cout << "index of insertion into main " << findIndexOfInsertion(main, pend[index], right_bound) << std::endl;
+	mergeInsertionSort(main);
+	
+	insertPendIntoMain(main, pend, pairs);
+	dq = main;
+	return ;
 }
-

@@ -6,11 +6,15 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:09:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 11:35:58 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:36:42 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+static bool strayPositiveSign(string& input);
+static bool	hasDuplicates(vector<int> copy);
+
 
 /**
  * @brief Parses and validates the command-line input for the Ford-Johnson algorithm.
@@ -83,8 +87,7 @@ void	PmergeMe::storeInput(char** elements)
 		throw std::runtime_error("at least two elements are needed for sorting");
 }
 
-
-bool strayPositiveSign(string& input)
+static bool strayPositiveSign(string& input)
 {
 	typedef	string::iterator s_iterator;
 
@@ -101,9 +104,8 @@ bool strayPositiveSign(string& input)
 	return (false);
 }
 
-bool	hasDuplicates(vector<int> copy)
+static bool	hasDuplicates(vector<int> copy)
 {
 	std::sort(copy.begin(), copy.end());
-
-	return ( std::adjacent_find(copy.begin(), copy.end()) != copy.end() );
+	return std::adjacent_find(copy.begin(), copy.end()) != copy.end() ;
 }

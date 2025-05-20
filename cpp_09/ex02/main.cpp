@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 18:25:10 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/03 18:32:15 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:48:04 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int main(int ac, char **av)
 {
 	if (ac != 1)
 	{
-		try { PmergeMe	yay(ac - 1, av + 1); }
+		try { PmergeMe	merge_insertion(ac - 1, av + 1); }
 		catch (std::exception& e)
 		{
 			std::cerr << "error: " << e.what() << std::endl;

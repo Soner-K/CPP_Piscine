@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.cpp                                          :+:      :+:    :+:   */
+/*   libs.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/15 17:23:20 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 16:35:23 by sokaraku         ###   ########.fr       */
+/*   Created: 2025/05/20 16:45:18 by sokaraku          #+#    #+#             */
+/*   Updated: 2025/05/20 16:45:52 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PmergeMe.hpp"
+#pragma once
 
+#include <iostream>
 
-void	PmergeMe::prepareJacobsthalSequence()
-{
-	_jacobsthal_sequence.push_back(0);
-	_jacobsthal_sequence.push_back(1);
-	_jacobsthal_sequence.push_back(1);
+#include <algorithm>
 
-	for (size_t i = 3; i < 33; i++)
-	{
-		int n = _jacobsthal_sequence[i - 1] + 2 * _jacobsthal_sequence[i - 2];
-		_jacobsthal_sequence.push_back(n);
-	}
-}
+#include <deque>
+#include <vector>
+#include <string>
+#include <utility>
 
+#include <exception>
+#include <limits>
+
+#include <stdint.h>
+#include <ctime>

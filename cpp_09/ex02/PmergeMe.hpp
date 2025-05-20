@@ -6,25 +6,17 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:05:43 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 13:08:06 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:56:33 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <iostream>
+#include "libs.hpp"
 
-#include <algorithm>
-
-#include <deque>
-#include <vector>
-#include <string>
-#include <utility>
-
-#include <exception>
-#include <limits>
-
-#include <stdint.h>
+# define BOLD_GREY "\033[1;30m"
+# define BOLD_BLUE "\033[1;34m"
+# define NEUTRAL "\033[0m"
 
 # define FORBIDDEN_CHARACTER "allowed characters : 0123456789+"
 # define EMPTY_INPUT "empty input"
@@ -64,7 +56,15 @@ private:
 	template <typename OutContainer, typename InContainer>
 	OutContainer	getMainOrPend(const InContainer& in, __int8_t mode);
 
-			void	insertPendIntoMain(vector<int>& main, vector<int>& pend, vector<pair<int,int> >& pairs);
+	template <typename Container, typename ContainerPair>
+	void	insertPendIntoMain(Container& main, Container& pend, ContainerPair& pairs);
+
+	
+	void	parse(int ac, char** elements);
+	
+	void	mergeInsertionSort(vector<int>& vct);
+	void	mergeInsertionSort(deque<int>& dq);
+
 public:
 			
 				PmergeMe( void );
@@ -73,22 +73,10 @@ public:
 				~PmergeMe( void );
 
 	PmergeMe(int ac, char** elements);
-	void	parse(int ac, char** elements);
-
-	void	mergeInsertionSort(vector<int>& vct);
-
-	vector<int>::const_iterator	getVectorBegin( void ) const;
-	vector<int>::const_iterator	getVectorEnd( void ) const;
 	
 };
 
 template <typename Iterator>
 void print(Iterator begin, Iterator end);
 
-std::ostream&	operator<<(std::ostream& o, const PmergeMe& rhs);
 #include "templates.tpp"
-
-/*			utils.cpp			*/
-//! not in there anymore, might need to delete it
-bool 	strayPositiveSign(string& input);
-bool	hasDuplicates(vector<int> copy);
