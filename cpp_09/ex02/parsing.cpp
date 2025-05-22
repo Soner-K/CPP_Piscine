@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 14:09:05 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 16:36:42 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:49:31 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static bool strayPositiveSign(string& input);
 static bool	hasDuplicates(vector<int> copy);
+static bool	isAlreadySorted(const vector<int>& vct);
 
 
 /**
@@ -21,7 +22,8 @@ static bool	hasDuplicates(vector<int> copy);
  *
  * This function combines the command-line arguments into a single input string,
  * checks for format errors, and stores the validated integers in the class's internal containers.
- * It throws exceptions if the input is empty, contains forbidden characters, duplicates, or overflows.
+ * It throws exceptions if the input is empty, contains forbidden characters, duplicates, overflows
+ * or if the sequence is already sorted.
  *
  * @param ac The number of command-line arguments.
  * @param elements The array of command-line argument strings.
@@ -55,6 +57,8 @@ void PmergeMe::handleInput(string& input, char **elements)
 
 	if (hasDuplicates(_vct_data) == true)
 		throw std::runtime_error(DUPLICATES);
+	if (isAlreadySorted(_vct_data) == true)
+		throw std::runtime_error(ALREADY_SORTED);
 }
 
 
@@ -108,4 +112,17 @@ static bool	hasDuplicates(vector<int> copy)
 {
 	std::sort(copy.begin(), copy.end());
 	return std::adjacent_find(copy.begin(), copy.end()) != copy.end() ;
+}
+
+
+static bool	isAlreadySorted(const vector<int>& vct)
+{
+	size_t	size = vct.size();
+
+	for (size_t i = 0; i < size; i++)
+	{
+		if (i + 1 < size && vct[i] > vct[i + 1])
+			return false;
+	}
+	return true;
 }

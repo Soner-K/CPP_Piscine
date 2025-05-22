@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:57:51 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 11:23:45 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 19:04:33 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,49 +32,32 @@ string itostr(unsigned int n)
 }
 
 /**
- * @brief Extracts a numeric value (year, month, or day) from a date string.
+ * @brief Extracts the year, month, and day from a date string in "YYYY-MM-DD" format.
  *
- * The function parses the input string `s` according to the specified `format` (YEAR, MONTH, or DAY)
- * and returns the corresponding value as a long integer. If the date format is invalid,
- * a BitcoinException is thrown with an error message indicating the line number.
+ * Parses the input string @p s, validates its format, and stores the numeric year, month,
+ * and day values in the provided pointers. If the format is invalid or extraction fails,
+ * throws a BitcoinException with an error message indicating the line number.
  *
  * @param s The date string in the format "YYYY-MM-DD".
- * @param format The part of the date to extract: YEAR, MONTH, or DAY.
  * @param current_line_nb The current line number (used for error reporting).
- * @return The extracted value as a long integer, or -1 if the format is not recognized.
- * @throws BitcoinException if the date format is invalid.
+ * @param year Pointer to a long where the extracted year will be stored.
+ * @param month Pointer to a long where the extracted month will be stored.
+ * @param day Pointer to a long where the extracted day will be stored.
+ * @throws BitcoinException if the date format is invalid or extraction fails.
  */
-long	getValueFromDate(string& s, char format, unsigned int current_line_nb)
+void	getValuesFromDate(string& s, unsigned int current_line_nb, long* year, long* month, long* day)
 {
-	size_t	begin = 0, last = 0;
-	const char	*str;
+	std::istringstream iss(s);
+	string y, m, d;
 
-	if (format == YEAR)
-	{
-		last = s.find("-");
-		if (last == string::npos)
-			throw (BitcoinException("bad date format in \'" + s + "\' at line " + itostr(current_line_nb)));
-		str = s.substr(begin, last).c_str();
-		return (atol(str));
-	}
-	if (format == MONTH)
-	{
-		begin = s.find("-");
-		last = s.find_last_of("-");
-		if (begin == string::npos)
-			throw (BitcoinException("bad date format in \'" + s + "\' at line " + itostr(current_line_nb)));
-		str = s.substr(begin + 1, last).c_str();
-		return (atol(str));
-	}
-	if (format == DAY)
-	{
+	std::getline(iss, y, '-');
+	std::getline(iss, m, '-');
+	std::getline(iss, d, '-');
 
-		begin = s.find_last_of("-");
-		if (begin == string::npos)
-			throw (BitcoinException("bad date format  in \'" + s + "\' at line " + itostr(current_line_nb)));
-		str = s.substr(begin + 1).c_str();
-		return (atol(str));
-	}
-	return -1;
-	
+
+	if (y.size() != 4 || m.size() != 2 || d.size() != 2)
+		throw BitcoinException("bad date format in '" + s + "' at line " + itostr(current_line_nb));
+
+	if (std::sscanf(s.c_str(), "%ld-%ld-%ld", year, month, day) != 3)
+		throw BitcoinException("bad date format in '" + s + "' at line " + itostr(current_line_nb));
 }

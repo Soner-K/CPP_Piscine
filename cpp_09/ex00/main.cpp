@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:29:04 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/22 18:04:28 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:49:52 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int ac, char **av)
 		try
 		{
 			std::cout
-			<< "\t\t\tdatabase format : " << GREY << "date,exchange_rate\n" << NEUTRAL
+			<< "\t\t\tdatabase format : " << GREY << "date<sep>exchange_rate\n" << NEUTRAL
 			<< "\t\t\tinput.txt format :" << GREY << " date | value\n" << NEUTRAL << std::endl;
 			BitcoinExchange	btc(av[1]);
 		}

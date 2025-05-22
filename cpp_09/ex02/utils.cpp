@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 17:23:20 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 16:35:23 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:43:58 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,3 @@ void	PmergeMe::prepareJacobsthalSequence()
 		_jacobsthal_sequence.push_back(n);
 	}
 }
-

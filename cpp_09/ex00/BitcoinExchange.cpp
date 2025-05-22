@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:49:27 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 11:28:00 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:48:36 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 	*this = other;
 }
 
-BitcoinExchange& BitcoinExchange::operator==(const BitcoinExchange& rhs)
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& rhs)
 {
 	if (this != &rhs)
 	{
@@ -31,6 +31,20 @@ BitcoinExchange& BitcoinExchange::operator==(const BitcoinExchange& rhs)
 		this->_filename = rhs._filename;
 	}
 	return *this;
+}
+
+void	BitcoinExchange::getSeparatorFromDatabase(string line)
+{
+	for (size_t i = 0; i < line.size(); i++)
+	{
+		unsigned char c = line[i];
+		if (!isdigit(c) && !isalpha(c) && c != '_' && !std::isspace(c))
+		{
+			this->_sep = c;
+			return ;
+		}
+	}
+	throw BitcoinException("no separator found in first line of the file");
 }
 
 BitcoinExchange::BitcoinExchange(const string filepath)
@@ -68,7 +82,10 @@ void BitcoinExchange::storeDatabaseIntoMap(string database)
  */
 void	BitcoinExchange::parseOneLine(string line, unsigned int current_line_nb)
 {
-	if (line.find_first_of("0123456789") == string::npos)
+	if (current_line_nb == 1)
+		getSeparatorFromDatabase(line);
+	size_t index = line.find_first_not_of("0123456789-.");
+	if (index != string::npos && line[index] != this->_sep)
 	{
 		if (current_line_nb == 1)
 			return ;
@@ -76,12 +93,12 @@ void	BitcoinExchange::parseOneLine(string line, unsigned int current_line_nb)
 			throw BitcoinException("unexpected content in \'" + line + "\' at line " + itostr(current_line_nb));
 	}
 
-	size_t		index = line.find(',');
+	index = line.find(this->_sep);
 	if (index == string::npos)
 		throw BitcoinException("bad format in \'" + line + "\' at line " + itostr(current_line_nb));
 
 	string	date = line.substr(0, index);
-	string bitcoin_value = line.substr(index + 1);	
+	string bitcoin_value = line.substr(index + 1);
 	checkDateValidity(date, current_line_nb);
 	checkBitcoinValidity(bitcoin_value, current_line_nb);	
 
@@ -90,9 +107,11 @@ void	BitcoinExchange::parseOneLine(string line, unsigned int current_line_nb)
 
 void	BitcoinExchange::checkDateValidity(string& date, unsigned int current_line_nb)
 {
-	long year = getValueFromDate(date, YEAR, current_line_nb);
-	long month = getValueFromDate(date, MONTH, current_line_nb);
-	long day = getValueFromDate(date, DAY, current_line_nb);
+	long year, month, day;
+	getValuesFromDate(date, current_line_nb, &year, &month, &day);
+	
+	if (std::count(date.begin(), date.end(), '-') != 2)
+		throw BitcoinException("bad format in \'" + date + "\' at line " + itostr(current_line_nb));
 
 	if (year < 2009 || year > 2022)
 		throw BitcoinException("bad year in \'" + date + "\' at line " + itostr(current_line_nb) + " (accepted years : 2009-2022)");
@@ -128,7 +147,7 @@ void	BitcoinExchange::checkBitcoinValidity(string& bitcoin, unsigned int current
  */
 void	BitcoinExchange::storeLine(string& line, string& date)
 {
-	size_t	index = line.find(',');
+	size_t	index = line.find(this->_sep);
 	float	value = strtof(&line[index + 1], NULL);
 	date.erase(std::remove(date.begin(), date.end(), '-'), date.end());
 

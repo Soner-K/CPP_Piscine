@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 16:46:11 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/19 11:32:57 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 18:43:48 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 
 #include <string>
 #include <stack>
+#include <list>
 
 #include <algorithm>
 #include <sstream>
-#include <list>
+#include <limits>
 
 #include <string.h>
 #include <errno.h>
@@ -50,8 +51,14 @@ class rpnCalculator
 private:
 			stack<Token, std::list<Token> >	_operationStack;
 
-			void			parseInput(string& input);
+			void					parseInput(string& input);
+			size_t 					countTokens(string& input, int8_t mode);
+
+			void					calculate(string& input);
+
 			
+			void					prepareTokens(Token& operation, Token& rvalue, Token& lvalue);
+			void					doOperation(Token lvalue, Token rvalue, Token operation);
 public:
 							rpnCalculator( void );
 							~rpnCalculator( void );
@@ -59,12 +66,8 @@ public:
 	rpnCalculator&			operator=(const rpnCalculator& rhs);
 	
 							rpnCalculator(string input);
-	size_t 					countTokens(string& input, int8_t mode);
 
-	void					calculate(string& input);
-	void					prepareTokens(Token& operation, Token& rvalue, Token& lvalue);
 
-	void					doOperation(Token lvalue, Token rvalue, Token operation);
 };
 
 						/*UTILS*/

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:58:25 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 17:01:58 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:55:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ PmergeMe::PmergeMe(int ac, char** elements)
 
 	clock_t	times[2], begin;
 	vector<int> input = _vct_data;
+	size_t	size = _vct_data.size();
 	
 	begin = clock();
 	mergeInsertionSort(_vct_data);
@@ -59,12 +60,14 @@ PmergeMe::PmergeMe(int ac, char** elements)
 	print(_vct_data.begin(), _vct_data.end());
 
 	std::cout
-	<< "Sorting time with std::" << BOLD_BLUE << "vector" << NEUTRAL
-	<< " : [ " << BOLD_GREY << (double)times[VECTOR] / CLOCKS_PER_SEC << NEUTRAL << " second]" << std::endl; 
+	<< "Sorting time with std::" << BOLD_CYAN << "vector" << NEUTRAL
+	<< " (N: " << BOLD_MAGENTA << size << NEUTRAL << " )"
+	<< " : [ " << BOLD_GREY << (double)times[VECTOR] / CLOCKS_PER_SEC << NEUTRAL << " second ]" << std::endl; 
 
 	std::cout
-	<< "Sorting time with std::" << BOLD_BLUE << "deque" << NEUTRAL
-	<< " : [ " << BOLD_GREY << (double)times[DEQUE] / CLOCKS_PER_SEC << NEUTRAL << " second]" << std::endl; 
+	<< "Sorting time with std::" << BOLD_CYAN << "deque" << NEUTRAL
+	<< " (N: " << BOLD_MAGENTA << size << NEUTRAL << " )"
+	<< " : [ " << BOLD_GREY << (double)times[DEQUE] / CLOCKS_PER_SEC << NEUTRAL << " second ]" << std::endl; 
 
 }
 

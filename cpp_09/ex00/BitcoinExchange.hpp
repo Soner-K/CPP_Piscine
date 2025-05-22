@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:38:57 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/04/22 17:57:40 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 20:39:20 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <cstdlib>
 #include <errno.h>
 #include <string.h>
+#include <stdio.h>
 
 #include <algorithm>
 
@@ -32,10 +33,6 @@ using std::string;
 
 # define DATABASE "data.csv"
 
-# define YEAR 1
-# define MONTH 2
-# define DAY 3
-
 class BitcoinExchange
 {
 	private:
@@ -43,6 +40,8 @@ class BitcoinExchange
 		map<long, float>			_file;
 		string						_filename;
 	
+		unsigned char						_sep;
+
 		void				storeDatabaseIntoMap(string database);
 		void				parseOneLine(string line, unsigned int current_line_nb);
 		void				checkBitcoinValidity(string& bitcoin, unsigned int current_line_nb);
@@ -53,13 +52,14 @@ class BitcoinExchange
 		void				handleOneLine(string line, unsigned int current_line_nb);
 		void				findValueAt(string& date, float nb,  unsigned int current_line_nb);
 
+		void				getSeparatorFromDatabase(string line);
 	public:
 		
 							BitcoinExchange( void );
 							BitcoinExchange(const BitcoinExchange& other);
 							BitcoinExchange(const string filepath);
 							~BitcoinExchange( void );
-		BitcoinExchange& 	operator==(const BitcoinExchange& rhs);
+		BitcoinExchange& 	operator=(const BitcoinExchange& rhs);
 
 };
 
@@ -76,4 +76,4 @@ class BitcoinException : public std::exception
 std::ostream& operator<<(std::ostream& os, const std::map<std::string, float>& map);
 
 string	itostr(unsigned int n);
-long	getValueFromDate(string& s, char format, unsigned int current_line_nb);
+void	getValuesFromDate(string& s, unsigned int current_line_nb, long* year, long* month, long* day);

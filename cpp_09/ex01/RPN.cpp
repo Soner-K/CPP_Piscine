@@ -133,6 +133,7 @@ void	rpnCalculator::prepareTokens(Token& operation, Token& rvalue, Token& lvalue
 
 	lvalue = _operationStack.top();
 	_operationStack.pop();
+
 }
 
 
@@ -171,9 +172,9 @@ void	rpnCalculator::doOperation(Token lvalue, Token rvalue, Token operation)
 			break;
 	}
 
-	if (value > INT32_MAX)
+	if (value > std::numeric_limits<int>::max())
 		throw std::runtime_error("overflow in operation \'" + itostr(lvalue.number) + " " + itostr(rvalue.number) + " " + operation.operation + "\'");
-	if (value < INT32_MIN)
+	if (value < std::numeric_limits<int>::min())
 		throw std::runtime_error("underflow in operation \'" + itostr(lvalue.number) + " " + itostr(rvalue.number) + " " + operation.operation + "\'");
 	
 	Token	toPush(0, static_cast<int>(value), NUMBER);

@@ -6,7 +6,7 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 17:05:43 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 16:56:33 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 14:58:54 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 #include "libs.hpp"
 
-# define BOLD_GREY "\033[1;30m"
-# define BOLD_BLUE "\033[1;34m"
+# define BOLD_GREY "\033[1m\033[30m"
+# define BOLD_MAGENTA "\033[1m\033[35m"  
+# define BOLD_CYAN "\033[1m\033[36m"
 # define NEUTRAL "\033[0m"
 
 # define FORBIDDEN_CHARACTER "allowed characters : 0123456789+"
@@ -23,6 +24,7 @@
 # define BAD_INPUT "bad input"
 # define OVERFLOW "value exceeds the maximum allowed integer limit"
 # define DUPLICATES "duplicates found in integer sequence"
+# define ALREADY_SORTED "sequence is already sorted"
 
 # define PEND 1
 # define MAIN 2

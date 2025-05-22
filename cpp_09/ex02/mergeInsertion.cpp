@@ -6,12 +6,25 @@
 /*   By: sokaraku <sokaraku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 13:08:39 by sokaraku          #+#    #+#             */
-/*   Updated: 2025/05/20 16:21:03 by sokaraku         ###   ########.fr       */
+/*   Updated: 2025/05/22 15:04:40 by sokaraku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+/**
+ * @brief Finds the right bound index for insertion using pairs.
+ *
+ * Searches for the pair whose first element matches to_find and returns the index
+ * of its second element in the main container.
+ *
+ * @tparam ContainerPair Container of pairs (e.g., vector<pair<int, int>>).
+ * @tparam Container Container of int (e.g., vector<int>).
+ * @param to_find The value to search for in the pairs.
+ * @param pairs The container of pairs.
+ * @param main The main container to search for the associated value.
+ * @return The index of the associated value in main.
+ */
 template<typename ContainerPair, typename Container>
 static int	findRightBoundFromPairs(int to_find, ContainerPair& pairs, Container main)
 {
@@ -28,6 +41,17 @@ static int	findRightBoundFromPairs(int to_find, ContainerPair& pairs, Container 
 	return std::find(main.begin(), main.end(), it->second) - main.begin();
 }	
 
+/**
+ * @brief Finds the insertion index for a value in a sorted container up to right_bound.
+ *
+ * Uses binary search to determine where to insert to_insert in main[0..right_bound].
+ *
+ * @tparam Container Container of int (e.g., vector<int>).
+ * @param main The sorted container.
+ * @param to_insert The value to insert.
+ * @param right_bound The upper bound index for the search.
+ * @return The index where to_insert should be inserted.
+ */
 template<typename Container>
 static int	findIndexOfInsertion(Container& main, int to_insert, int right_bound)
 {
@@ -45,6 +69,16 @@ static int	findIndexOfInsertion(Container& main, int to_insert, int right_bound)
 	return left_bound;
 }
 
+/**
+ * @brief Sets the priority insertion order for pending elements using the Jacobsthal sequence.
+ *
+ * Fills the priority_insertion array with elements from pend based on the Jacobsthal numbers.
+ *
+ * @tparam Container Container of int (e.g., vector<int>).
+ * @param priority_insertion Array to store the priority order.
+ * @param pend The pending elements.
+ * @param jacobsthal The Jacobsthal sequence.
+ */
 template <typename Container>
 static void setPriorityInsertion(int (&priority_insertion)[31], Container& pend, const vector<int> jacobsthal)
 {
@@ -59,6 +93,17 @@ static void setPriorityInsertion(int (&priority_insertion)[31], Container& pend,
 	
 }
 
+/**
+ * @brief Inserts pending elements into the main container in the correct order.
+ *
+ * Uses the Ford-Johnson algorithm logic to merge pend into main using pairs and priority.
+ *
+ * @tparam Container Container of int (e.g., vector<int> or deque<int>).
+ * @tparam ContainerPair Container of pairs (e.g., vector<pair<int, int>>).
+ * @param main The main chain.
+ * @param pend The pending elements.
+ * @param pairs The pairs used for association.
+ */
 template<typename Container, typename ContainerPair>
 void	PmergeMe::insertPendIntoMain(Container& main, Container& pend, ContainerPair& pairs)
 {
@@ -84,6 +129,13 @@ void	PmergeMe::insertPendIntoMain(Container& main, Container& pend, ContainerPai
 	}
 }
 
+/**
+ * @brief Sorts a vector of integers using the Ford-Johnson merge-insertion algorithm.
+ *
+ * Recursively sorts the input vector using pair formation, sorting, and merging.
+ *
+ * @param vct The vector of integers to sort.
+ */
 void	PmergeMe::mergeInsertionSort(vector<int>& vct)
 {
 	typedef pair<int, int> t_pairInts;
@@ -103,6 +155,13 @@ void	PmergeMe::mergeInsertionSort(vector<int>& vct)
 	return ;
 }
 
+/**
+ * @brief Sorts a deque of integers using the Ford-Johnson merge-insertion algorithm.
+ *
+ * Recursively sorts the input deque using pair formation, sorting, and merging.
+ *
+ * @param dq The deque of integers to sort.
+ */
 void	PmergeMe::mergeInsertionSort(deque<int>& dq)
 {
 	typedef pair<int, int> t_pairInts;
